@@ -10,15 +10,12 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
-  },  {
+  },
+  {
     path: 'signup',
     loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule)
   },
-  {
-    path: 'password',
-    loadChildren: () => import('./password/password.module').then( m => m.PasswordPageModule)
-  },
-
+  
 ];
 
 @NgModule({
