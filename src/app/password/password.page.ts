@@ -6,13 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./password.page.scss'],
 })
 export class PasswordPage implements OnInit {
-  show = false;
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  showPassword(){
-    this.show = !this.show;
-  }
+ 
 }

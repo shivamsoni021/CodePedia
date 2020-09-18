@@ -1,48 +1,49 @@
 <ion-header class="ion-no-border">
   <ion-toolbar color="light">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="home" style="color:blue"></ion-back-button>
+      <div (click)="navigateBack()">back</div>
     </ion-buttons>
-    <ion-title class="ion-text-center" style="font-weight: bold;">New Account</ion-title>
+    <ion-title class="ion-text-center">New Account</ion-title>
   </ion-toolbar>
-  <!--<p class="ion-text-center">Start by entering your email address below.</p>-->
+
 </ion-header>
 <ion-content>
-  <p class="ion-text-center">Start by entering your email address below.</p>
+  <p class="ion-text-center heading-title">Start by entering your email address below.</p>
+  <div class="codeshala-block">
+  <img class="codeshala-icon" src="https://lh3.googleusercontent.com/proxy/Xgs6vd8i9SBuFTeph-P1ptP9AsXa3J07hVkSWJg156FmtmWeW3sMrMk2nXrIDZ_KzULgT2dQuzIxVeCKrp1GsFU_SpPd3yeyF8DJU5Yj0lhRgqWS-IFWj2xgjiNryviRGOh99wmYCqCbifZ1RwGAyoAHsECyNd0"/>
+</div>
   <form #f="ngForm" (ngSubmit)="onSubmit(f)"> 
-  <ion-grid>
-    <ion-row>
-      <ion-col size-xs="12">
-        <ion-card>  
-          <ion-input type="email" placeholder="Your email" class="roundedInput" 
-          style="margin-top: 10px;"
+  
+        <ion-card *ngIf="!isClicked" class="input-card">  
+          <ion-input type="email" placeholder="Your email" class="rounded-input" 
           ngModel name="email" required email #emailCtrl="ngModel"></ion-input>
         </ion-card>
-        <ion-item lines="none">
-        <ion-label style="text-align:center; color: #eb445a;" *ngIf="!emailCtrl.valid && emailCtrl.touched">
-          Enter a valid email address!</ion-label>
-        </ion-item>
-      </ion-col>
-    
-    </ion-row>
-    <ion-row>
-      <ion-col size-xs="12">
+        <ion-card *ngIf="isClicked" class="input-card"> 
+            <ion-label>
+              <ion-input 
+              [type]="show ? 'text' : 'password'" 
+              placeholder="Your password" 
+              class="rounded-input" 
+              ngModel name="password" required minlength="8" #passwordCtrl="ngModel">
+              <ion-button class="show-button" fill="clear" strong="true" 
+              (click)="showPassword()">Show</ion-button>
+              </ion-input>
+              
+            </ion-label>
+           
+        </ion-card>
+       
+        <div class="already-account">
         <p class="input">Already have an account?</p>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size-xs="12">
         <ion-button type="button" fill="clear" class="signin" expand="block">SIGN IN</ion-button>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size-xs="12">
-        <ion-button class="submit" type="submit" expand="block" style="height: 60px;" strong="true" 
-        [routerLink]="['/password']" routerLinkActive="router-link-active" [disabled]="!f.valid">Continue
-          <ion-icon name="arrow-forward-circle" slot="end" style="position: absolute; right: 10px;" ></ion-icon>
+      </div>
+      <ion-button *ngIf="isClicked" class="submit" type="submit" expand="block" strong="true"  >Continue
+        <ion-icon class="next-icon" name="arrow-forward-circle" slot="end"></ion-icon>
+      </ion-button>
+        <ion-button *ngIf="!isClicked" class="submit" type="submit" expand="block" strong="true" 
+        (click)="onClicked()" [disabled]="!f.valid">Continue
+          <ion-icon class="next-icon" name="arrow-forward-circle" slot="end"></ion-icon>
         </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+     
   </form>
 </ion-content>
