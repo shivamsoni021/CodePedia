@@ -1,9 +1,13 @@
 <ion-header class="ion-no-border">
   <ion-toolbar color="light">
-    <ion-buttons slot="start">
+    <ion-buttons *ngIf="!isClicked" slot="start">
+      <ion-back-button defaultHref="home" style="color:blue"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons *ngIf="isClicked" slot="start">
       <div (click)="navigateBack()">back</div>
     </ion-buttons>
-    <ion-title class="ion-text-center">New Account</ion-title>
+    <ion-title *ngIf="!isClicked" class="ion-text-center">New Account</ion-title>
+    <ion-title *ngIf="isClicked" class="ion-text-center" style="font-weight: bold;">Create Password</ion-title>
   </ion-toolbar>
 
 </ion-header>
