@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+        <ion-back-button mode="md"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center code-shala-header-title">{{blogDetails.tag}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="post-details">
+
+        <h3 class="post-title">{{blogDetails.postTitle}}</h3>
+        <h5 class="post-description">{{blogDetails.shortDescription}}</h5>
+        <small class="post-credit">
+            Posted by {{ blogDetails.authorName }} &bull; on
+            {{ blogDetails.timePublished | date: "shortDate" }}
+          </small>
+          <ion-img [src]="blogDetails.image"></ion-img>
+          <p class="post-content">Content</p>
+    </div>
+
+
+</ion-content>
