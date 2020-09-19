@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment'
 import { Observable } from 'rxjs';
 
-interface AuthResponseData{
+export interface AuthResponseData{
     idToken: string;
     email:string;
     refreshToken :string;
@@ -33,4 +33,13 @@ export class AuthService{
             `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebaseApiKey}`,
             {email : email, password: password , returnSecureToken : true, token: environment.firebaseApiKey});
     }
+
+    login(email:string , password:string){
+        return this.http.post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebaseApiKey}`,
+        {email: email , password : password , returnSecureToken : true });
+    }
+
+    logOut(){}
+
+
 }

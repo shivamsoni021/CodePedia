@@ -1,0 +1,116 @@
+ion-buttons{
+    z-index: 100;
+}
+
+ion-content{
+    --ion-background-color: #f4f5f8;
+}
+
+ion-header{
+    --ion-background-color: #f4f5f8;
+}
+
+.heading-title{
+    margin-top: 5vh;
+    font-size: 1.25rem;
+    margin-left: 3rem;
+    margin-right: 3rem;
+    font-weight: 200;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+ion-title{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+
+ion-card{
+    padding: 0.5rem 1rem;
+    border-radius: 0.75rem;
+    background-color: white;
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+    margin-top: 4.25rem;
+    
+    .hr {
+            border-bottom: 1px solid #ccc;
+            margin: 10px 0;
+            width: 100%;
+      }
+        
+   }
+
+
+.rounded-input{
+    border-radius: 0.75rem;
+    font-size: 1.125rem;
+
+}
+
+show-button{
+    position: absolute;
+    right: 0;
+    margin-left: 0.5rem;
+}
+
+.input{
+    text-align: center;
+    margin-top: 3.125rem;
+    margin-bottom: 0;
+   }
+   .already-account{
+    font-size: 1rem;
+}
+
+.signin{
+    width: auto;
+    margin: auto;
+    
+}
+
+.submit{
+
+    --border-radius: 0.75rem;
+    --border-width: 0.0625rem;
+    --box-shadow: 2px gray;
+    --highlight-height: 0;
+    --background: #3880ff;
+    width: auto;
+    margin: auto;
+    margin-top: 8vh;
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+    height: 3.75rem;
+    //margin-left: 120px;
+    //margin-right: 120px;
+    //margin-top: 120px;
+}
+
+
+.codeshala-icon{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 7vh;
+    height: 10rem;
+    width:8.25rem;
+}
+
+.next-icon{
+    position: absolute; 
+    right: 0.625rem;
+}
+
+
+.input-card {
+
+    ion-button {
+        position: absolute; right: 0;
+    }
+}
+
