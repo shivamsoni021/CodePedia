@@ -1,9 +1,23 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>blogs</ion-title>
+    <ion-title class="ion-text-center">Blogs</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+    <ion-list class="blog-list">
+        <ion-item *ngFor="let blog of blogsList">
+            <ion-thumbnail class="post-image" slot="start">
+                <ion-img [src]="blog.image"></ion-img>
+              </ion-thumbnail>
+           <ion-label>
+               <h4 class="post-title">{{blog.postTitle}}</h4>
+               <h6 class="post-description">{{blog.shortDescription}}</h6>
+               <small class="post-credit">
+                Posted by {{ blog.authorName }} &bull; on
+                {{ blog.timePublished | date: "shortDate" }}
+              </small>
+           </ion-label>
+        </ion-item>
+    </ion-list>
 </ion-content>
