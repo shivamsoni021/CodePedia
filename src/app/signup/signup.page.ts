@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 import { AuthService, AuthResponseData } from '../../auth/auth.service';
+import { LOGIN_ERROR_CODES } from '../constants/app.constants';
+import { AlertService } from '../services/alert.service';
 
 @Component({
     selector: 'app-signup',
@@ -18,14 +20,13 @@ export class SignupPage implements OnInit {
     isClicked = false;
     email: string;
     password: string;
+
     constructor(
         private authService: AuthService,
         private loadingController: LoadingController,
-        private alertDialog: AlertController,
-        private router: Router
-    ) {
-
-    }
+        private router: Router,
+        private alertService: AlertService
+    ) {}
 
     ngOnInit() {
 
@@ -64,10 +65,10 @@ export class SignupPage implements OnInit {
                         const code = errorRes.error.error.message;
                         let message = 'Could not Sign you in ! Please try again!!';
 
-                        if (code === 'EMAIL_EXISTS') {
+                        if (code === LOGIN_ERROR_CODES.EMAIL_EXISTS) {
                             message = 'This email is already registered yet!';
                         }
-                        this.showAlert(message);
+                        this.alertService.showAlert('Authentication Failed', message);
                     });
             });
     }
@@ -75,15 +76,9 @@ export class SignupPage implements OnInit {
     navigateBack() {
         this.isClicked = false;
     }
-    
+
     showPassword() {
         this.show = !this.show;
-    }
-
-    private showAlert(message: string) {
-        this.alertDialog.create(
-            { header: 'Authentication Failed', message, buttons: ['Okay'] }
-            ).then(alertEl => alertEl.present());
     }
 
 }

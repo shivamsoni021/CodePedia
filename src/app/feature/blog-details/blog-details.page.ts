@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BlogsList } from '../blogs/interface/blogs.interface';
+import { BlogsList } from 'src/app/tabs/blogs/interface/blogs.interface';
+
 
 @Component({
   selector: 'app-blog-details',

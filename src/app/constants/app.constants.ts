@@ -1,0 +1,3 @@
+export const LOGIN_ERROR_CODES = {
+    EMAIL_EXISTS: 'EMAIL_EXISTS'
+};
