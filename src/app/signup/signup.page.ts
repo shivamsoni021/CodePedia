@@ -11,13 +11,15 @@ import { AuthService, AuthResponseData } from '../../auth/auth.service';
 })
 export class SignupPage implements OnInit {
 
+    @ViewChild('f') form: NgForm;
+
     isLoading = false;
     show = false;
-    isClicked: boolean = false;
-    @ViewChild('f') form: NgForm;
+    isClicked = false;
     email: string;
     password: string;
-    constructor(private authService: AuthService,
+    constructor(
+        private authService: AuthService,
         private loadingController: LoadingController,
         private alertDialog: AlertController,
         private router: Router
@@ -37,7 +39,7 @@ export class SignupPage implements OnInit {
     }
 
     navigateToHomePage() {
-        this.router.navigate(['/tabs/tab-nav']);
+        this.router.navigate(['/tabs']);
     }
 
     onSubmit(form: NgForm) {
@@ -60,7 +62,7 @@ export class SignupPage implements OnInit {
                         this.isLoading = false;
                         loadingEl.dismiss();
                         const code = errorRes.error.error.message;
-                        let message = "Could not Sign you in ! Please try again!!";
+                        let message = 'Could not Sign you in ! Please try again!!';
 
                         if (code === 'EMAIL_EXISTS') {
                             message = 'This email is already registered yet!';
@@ -73,12 +75,15 @@ export class SignupPage implements OnInit {
     navigateBack() {
         this.isClicked = false;
     }
+    
     showPassword() {
         this.show = !this.show;
     }
 
     private showAlert(message: string) {
-        this.alertDialog.create({ header: "Authentication Failed", message: message, buttons: ['Okay'] }).then(alertEl => alertEl.present());
+        this.alertDialog.create(
+            { header: 'Authentication Failed', message, buttons: ['Okay'] }
+            ).then(alertEl => alertEl.present());
     }
 
 }
