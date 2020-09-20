@@ -1,10 +1,11 @@
 import { Component, OnInit ,ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
 import { AuthResponseData } from '../../auth/auth.service';
+import { AlertService } from '../services/alert.service';
 
 @Component({
   selector: 'app-signin',
@@ -12,7 +13,7 @@ import { AuthResponseData } from '../../auth/auth.service';
   styleUrls: ['./signin.page.scss'],
 })
 export class SigninPage implements OnInit {
-
+  auth="fs";
   isLoading = false;
   show = false;
   isClicked: boolean = false;
@@ -20,9 +21,9 @@ export class SigninPage implements OnInit {
   email: string;
   password: string;
   constructor(private authService: AuthService,
-    private alertDialog: AlertController,
     private loadingController : LoadingController,
-    private router : Router
+    private router : Router,
+    private alertService: AlertService
     ) { }
 
   ngOnInit() {
@@ -30,7 +31,7 @@ export class SigninPage implements OnInit {
 
   
   navigateToHomePage(){
-    this.router.navigate(['/']);
+    this.router.navigate(['/tabs']);
 }
 
   onSubmit(form: NgForm) {
@@ -46,12 +47,19 @@ export class SigninPage implements OnInit {
       authObs.subscribe(resData => {
         this.isLoading = false;
         loadingEl.dismiss();
+        console.log(resData.localId);
+
+        this.authService.getData("sfsa").subscribe(resData =>
+          {
+            
+          });
         this.navigateToHomePage();
       },
       errorRes => {
           this.isLoading = false;
           loadingEl.dismiss();
           const code =  errorRes.error.error.message;
+          
           let message = "Could not Sign you in ! Please try again!!";
           
           if(code === 'EMAIL_NOT_FOUND'){
@@ -60,8 +68,10 @@ export class SigninPage implements OnInit {
           else if(code === 'INVALID_PASSWORD'){
             message = 'Incorrect Password'
           }
-          this.showAlert(message);
+         // this.showAlert(message);
+          this.alertService.showAlert("Authentication Failed", message);
       });
+
     });
   
     this.email = this.form.value['email'];
@@ -77,10 +87,6 @@ export class SigninPage implements OnInit {
   }
   showPassword() {
     this.show = !this.show;
-  }
-
-  private showAlert(message:string){
-        this.alertDialog.create({ header: "Authentication Failed", message: message , buttons : ['Okay']}).then(alertEl => alertEl.present());
   }
 
 
