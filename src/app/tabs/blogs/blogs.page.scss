@@ -4,9 +4,10 @@
         color: black;
         white-space: normal;
     }
-    .post-description{
+    h5{
         font-size: 0.8rem;
         color: #aaaaaa;
+        font-weight: bold;
     }
     .post-credit{
         font-size: 0.65rem;
@@ -18,5 +19,16 @@
 
     .bookmarked {
         color: darkgoldenrod;
+    }
+
+    ion-thumbnail{
+        margin: 0 16px 0 0;
+        height: 90px;
+        width: 90px;
+        --border-radius: 20px;
+    }
+
+    ion-item {
+        margin-bottom: 10px;
     }
 }

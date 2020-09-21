@@ -12,9 +12,8 @@
                 </ion-thumbnail>
              <ion-label>
                  <div (click)="navigateToBlogDetailsPage(blog)">
-  
+                    <h5>{{blog.tag}}</h5>
                      <h4 class="post-title">{{blog.postTitle}}</h4>
-                     <h6 class="post-description">{{blog.shortDescription}}</h6>
                   </div>
                  <small class="post-credit">
                   Posted by {{ blog.authorName }} &bull; on
