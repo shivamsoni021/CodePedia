@@ -1,7 +1,22 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Profile
-    </ion-title>
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-icon slot="end" name="settings-sharp" class="settings" routerLink="./settings"></ion-icon>
   </ion-toolbar>
 </ion-header>
+
+<ion-content color="light">
+  <div>
+    <ion-avatar class="profile">
+      <img src="https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png">
+    </ion-avatar><br>
+    <ion-label class="ion-text-center">
+      <h3 class="name">Name</h3>
+      <p>123XP</p><br>
+    </ion-label>
+
+    <ion-segment value="badges" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="badges">Badges</ion-segment-button>
+      <ion-segment-button value="history">History</ion-segment-button>
+    </ion-segment>
+  </div>
+</ion-content>
