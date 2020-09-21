@@ -14,9 +14,13 @@
       <p>123XP</p><br>
     </ion-label>
 
-    <ion-segment value="badges" (ionChange)="segmentChanged($event)">
+    <ion-segment value="badges" (ionChange)="segmentChanged($event)" #segment>
       <ion-segment-button value="badges">Badges</ion-segment-button>
       <ion-segment-button value="history">History</ion-segment-button>
     </ion-segment>
+    <ion-label class="ion-text-center">
+      <h2 *ngIf="!isBadges">Badges here!</h2>
+      <h2 *ngIf="isBadges">History here!</h2>
+    </ion-label>
   </div>
 </ion-content>

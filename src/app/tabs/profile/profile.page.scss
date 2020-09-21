@@ -6,14 +6,11 @@
 
 .profile{
     display: block;
-    padding: 0px;
     margin-left: auto;
     margin-right: auto;
     width: 9.315rem;
     height: 9.315rem;
     border: 5px solid white;
-    outline: 0px;
-    padding: 0px;
 }
 
 .name{
@@ -21,15 +18,7 @@
     font-size: 1.242rem;
 }
 
-// .segment{
-//     margin-left: auto;
-//     margin-right: auto;
-//     border-radius: 20px;
-//     width: 11.557rem;
-//     height: 2rem;
-//     background-color: white;
-//     align-items: center;
-// }
+
 
 ion-segment-button{
     size: 0.5rem;
