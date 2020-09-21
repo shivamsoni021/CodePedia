@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { DatabaseService } from '../../database/database.service';
 import { HomeTechnology } from '../../interfaces/home-technology.interface';
@@ -10,17 +11,23 @@ import { HomeTechnology } from '../../interfaces/home-technology.interface';
 })
 export class HomePage {
 
-  homeTechnologyArray : HomeTechnology[]; 
+  slideOpts = {
+    slidesPerView: 1.2,
+  }
+
+  technologyTitle :string = "Shivam";
+  technologies : HomeTechnology[]; 
   constructor(private databaseService : DatabaseService,
-  ) {}
+  private menuController : MenuController,
+    ) {}
 
   ngOnInit(){
     // this.databaseService.getDataObject().subscribe((resData:any) =>{
     //   const code = resData.allTechnology.aT
     //   console.log(resData.allTechnology);
     // });
-    this.homeTechnologyArray =  this.databaseService.getDataObject();
-    console.log(this.homeTechnologyArray);
+    this.technologies =  this.databaseService.getDataObject();
+  
   }
   
 
