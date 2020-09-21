@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SegmentChangeEventDetail } from '@ionic/core';
 
 @Component({
   selector: 'app-profile',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-
+  isBadges=false;
   constructor() { }
 
   ngOnInit() {
+  }
+
+  segmentChanged(event: CustomEvent<SegmentChangeEventDetail>){
+    console.log(event.detail);
+    this.isBadges= !this.isBadges;
   }
 
 }
