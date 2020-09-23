@@ -1,10 +1,10 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-        <ion-back-button mode="md"></ion-back-button>
-    </ion-buttons>
-    <ion-title class="ion-text-center code-shala-header-title">{{blogDetails.tag}}</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button mode="md"></ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-center code-shala-header-title">{{blogDetails.tag}}</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
@@ -15,10 +15,25 @@
         <small class="post-credit">
             Posted by {{ blogDetails.authorName }} &bull; on
             {{ blogDetails.timePublished | date: "shortDate" }}
-          </small>
-          <ion-img [src]="blogDetails.image"></ion-img>
-          <p class="post-content">Content</p>
+        </small>
+        <ion-img [src]="blogDetails.image"></ion-img>
+        <p class="post-content">Content</p>
     </div>
-
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button>
+            <ion-icon name="share"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="top">
+            <ion-fab-button (click)="sharePost('whatsapp')">
+                <ion-icon name="logo-whatsapp"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-button  (click)="sharePost('facebook')">
+                <ion-icon name="logo-facebook"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-button (click)="sharePost('twitter')">
+                <ion-icon name="logo-twitter"></ion-icon>
+            </ion-fab-button>
+        </ion-fab-list>
+    </ion-fab>
 
 </ion-content>

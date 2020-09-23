@@ -1,27 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { Router } from '@angular/router';
 import { ToastService } from 'src/app/services/toast.service';
 import { BlogsList } from './interface/blogs.interface';
 import { BlogService } from './services/blog.service';
 import { NAVIGATION_PATHS } from 'src/app/constants/navigation.constants';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
     selector: 'app-blogs',
     templateUrl: './blogs.page.html',
     styleUrls: ['./blogs.page.scss'],
 })
-export class BlogsPage implements OnInit {
+export class BlogsPage {
 
     blogsList: BlogsList[] = [];
 
     constructor(
         private router: Router,
         private toastService: ToastService,
-        private blogService: BlogService
+        private blogService: BlogService,
+        private loadingService: LoadingService
     ) { }
 
-    ngOnInit() {
+    ionViewWillEnter() {
+        this.loadingService.showLoader();
         this.getBlogData();
     }
 
@@ -44,7 +47,12 @@ export class BlogsPage implements OnInit {
             for (const blog in res) {
                 this.blogsList.push(res[blog]);
             }
+            this.loadingService.hideLoader();
         });
+    }
+
+    ionViewDidLeave() {
+        this.blogsList = [];
     }
 
 }

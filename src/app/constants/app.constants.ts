@@ -8,3 +8,9 @@ export const ENDPOINTS = {
     BLOGS: 'blogs.json',
     ALL_TECHNOLOGY: 'courses/allTechnology'
 };
+
+export const SOCIAL_MEDIA_PLATFORMS = {
+    FACEBOOK: 'facebook',
+    WHATSAPP: 'whatsapp',
+    TWITTER: 'twitter'
+};
