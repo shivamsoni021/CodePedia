@@ -5,5 +5,6 @@ export const LOGIN_ERROR_CODES = {
 export const BASE_URL = 'https://codeshala-6dd34.firebaseio.com';
 
 export const ENDPOINTS = {
-    BLOGS: 'blogs.json'
+    BLOGS: 'blogs.json',
+    ALL_TECHNOLOGY: 'courses/allTechnology'
 };

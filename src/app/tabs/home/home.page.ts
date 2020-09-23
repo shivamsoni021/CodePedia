@@ -26,7 +26,7 @@ export class HomePage {
     //   const code = resData.allTechnology.aT
     //   console.log(resData.allTechnology);
     // });
-    this.technologies =  this.databaseService.getDataObject();
+   this.technologies =  this.databaseService.getDataObject();
   
   }
   

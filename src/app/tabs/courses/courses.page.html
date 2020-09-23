@@ -5,3 +5,96 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content>
+  <ion-segment class="segment" mode="ios" value="all-courses" (ionChange)="segmentChanged($event)" #segment>
+    <ion-segment-button value="all-courses">All Courses</ion-segment-button>
+    <ion-segment-button value="studying">Studying</ion-segment-button>
+  </ion-segment>
+
+  <div class="programming-language">
+    <ion-item lines="none" class="technology-title">
+      <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+      <ion-label>Programming Languages</ion-label>
+    </ion-item>
+    <ion-slides pager="false" [options]="slideOpts">
+      <ion-slide *ngFor="let technology of allTechnology">
+        <ion-card (click)="navigateToCoursePage(technology)">
+          <ion-img width="200" height="200" [src]="technology.imageUrl"></ion-img>
+          <ion-card-header>
+            <ion-card-title>{{ technology.atName }}</ion-card-title>
+            <ion-card-subtitle>{{ technology.atDescription }}</ion-card-subtitle>
+         </ion-card-header>
+          <ion-card-content>
+
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <div class="trending-language">
+    <ion-item lines="none" class="technology-title">
+      <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+      <ion-label>Trending Technologies</ion-label>
+    </ion-item>
+    <ion-slides pager="false" [options]="slideOpts">
+      <ion-slide *ngFor="let technology of allTechnology">
+        <ion-card>
+
+          <ion-img width="200" height="200" [src]="technology.imageUrl"></ion-img>
+          <ion-card-header>
+            <ion-card-title>{{ technology.atName }}</ion-card-title>
+            <ion-card-subtitle>{{ technology.atDescription }}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <div class="web-technologies">
+    <ion-item lines="none" class="technology-title">
+      <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+      <ion-label>Web Technologies</ion-label>
+    </ion-item>
+    <ion-slides pager="false" [options]="slideOpts">
+      <ion-slide *ngFor="let technology of allTechnology">
+        <ion-card>
+
+          <ion-img width="200" height="200" [src]="technology.imageUrl"></ion-img>
+          <ion-card-header>
+            <ion-card-title>{{ technology.atName }}</ion-card-title>
+            <ion-card-subtitle>{{ technology.atDescription }}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <div class="scripting-language">
+    <ion-item lines="none" class="technology-title">
+      <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+      <ion-label>Scripting Languages</ion-label>
+    </ion-item>
+    <ion-slides pager="false" [options]="slideOpts">
+      <ion-slide *ngFor="let technology of allTechnology">
+        <ion-card>
+
+          <ion-img width="200" height="200" [src]="technology.imageUrl"></ion-img>
+          <ion-card-header>
+            <ion-card-title>{{ technology.atName }}</ion-card-title>
+            <ion-card-subtitle>{{ technology.atDescription }}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </div>
+</ion-content>

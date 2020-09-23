@@ -7,7 +7,7 @@ import { SegmentChangeEventDetail } from '@ionic/core';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-  isBadges=false;
+  isBadges=true;
   constructor() { }
 
   ngOnInit() {
@@ -17,5 +17,5 @@ export class ProfilePage implements OnInit {
     console.log(event.detail);
     this.isBadges= !this.isBadges;
   }
-
+  
 }

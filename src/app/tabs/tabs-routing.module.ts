@@ -23,7 +23,8 @@ const routes: Routes = [
                     {
                         path: '',
                         loadChildren: () => import('./courses/courses.module').then(m => m.CoursesPageModule)
-                    }
+                    },
+                    
                 ]
 
             },
