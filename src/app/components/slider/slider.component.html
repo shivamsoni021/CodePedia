@@ -21,7 +21,7 @@
         <ion-slides #slides (ionSlideReachEnd)="reachEnd($event)" [options]="sliderConfiguration?.sliderOptions" class="preview-desc-slides">
             <ion-slide *ngFor="let item of sliderConfiguration?.items; index as itemIndex" class="slide">
                 <div class="container">
-                    <div class="image">
+                    <div class="image" [ngClass]="{'course-image' : item.type === 'course'}">
                         <img (click)="itemClick.emit(item.name)"
                             [src]="item.imageSrc ? item.imageSrc : '../../../assets/images/default-poster.png'">
                         <!-- <span class="watchlist-container" (click)="addToMovieSeriesWatchlist(itemIndex, !item.inWatchList, $event)">
@@ -35,8 +35,8 @@
                     </div>
                     <p (click)="itemClick.emit(itemIndex)" class="name notranslate">{{item.name}}</p>
                     <!-- <span (click)="itemClick.emit(itemIndex)" *ngIf="item.description"
-                        class="description">{{item.description}}</span>
-                    <span (click)="itemClick.emit(itemIndex)" *ngIf="item.rating !== null && item.rating !== undefined"
+                        class="description">{{item.description}}</span> -->
+                   <!--  <span (click)="itemClick.emit(itemIndex)" *ngIf="item.rating !== null && item.rating !== undefined"
                         class="rating"><img src="../../../assets/images/rate.svg">{{item.rating}}</span> -->
                 </div>
             </ion-slide>
