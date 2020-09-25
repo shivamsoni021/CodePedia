@@ -7,6 +7,7 @@ import { BASE_URL, ENDPOINTS } from 'src/app/constants/app.constants';
     providedIn: 'root'
 })
 export class BlogService {
+
     constructor(private httpClient: HttpClient) { }
 
     postBlogsData(requestObject: BlogsList) {
@@ -15,5 +16,9 @@ export class BlogService {
 
     getBlogsData() {
         return this.httpClient.get(`${BASE_URL}/${ENDPOINTS.BLOGS}`);
+    }
+
+    loadBlogByTagName(tagName: string) {
+        return this.httpClient.get(`${BASE_URL}/${ENDPOINTS.BLOGS}?orderBy="tag"&equalTo="${tagName}"`);
     }
 }

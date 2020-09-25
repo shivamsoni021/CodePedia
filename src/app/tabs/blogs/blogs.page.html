@@ -5,7 +5,10 @@
   </ion-header>
   
   <ion-content>
-
+    <div class="all-post">
+        <h5>Tags</h5>
+    </div>
+    <app-slider (itemClick)="loadDataByTagName($event)" [sliderConfiguration]="tagList"></app-slider>
     <div class="all-post">
         <h5>Latest Posts</h5>
     </div>

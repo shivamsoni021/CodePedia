@@ -19,6 +19,11 @@ const routes: Routes = [
         path: 'signin',
         loadChildren: () => import('./signin/signin.module').then(m => m.SigninPageModule)
     },
+    {
+        path: 'blog-tag-list',
+        loadChildren: () => import('./feature/blog-tag-list/blog-tag-list.module').then(m => m.BlogTagListPageModule)
+    },
+
 ];
 
 @NgModule({

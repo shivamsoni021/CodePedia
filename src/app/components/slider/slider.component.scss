@@ -27,8 +27,8 @@
 			border-radius: 8px;
 			position: relative;
 			.image {
-				width: 100px;
-				height: 100px;
+				width: 75px;
+				height: 75px;
 				img {
 					// object-fit: cover;
 					border-radius: 8px;
@@ -70,7 +70,7 @@
 				margin: 0;
 				padding-top: 4px;
 				text-align: center;
-				font-size: var(--font-mediumText2);
+				font-size: .87rem;
 				@include line-clamp(1);
 			}
 			.description {
