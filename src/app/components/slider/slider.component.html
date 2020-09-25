@@ -1,0 +1,72 @@
+<ng-container *ngIf="sliderConfiguration?.orientation === 'horizontal'">
+    <ng-container *ngIf="sliderConfiguration?.type === 'preview'">
+        <ion-slides [options]="sliderConfiguration?.sliderOptions" class="preview-slides">
+            <ion-slide *ngFor="let item of sliderConfiguration?.items; index as itemIndex" class="slide">
+                <div class="image">
+                    <img (click)="itemClick.emit(itemIndex)"
+                        [src]="item.imageSrc ? item.imageSrc : '../../../assets/images/default-poster.png'">
+                    <span class="watchlist-container" (click)="addToMovieSeriesWatchlist(itemIndex, !item.inWatchList, $event)">
+                        <img [src]="item.inWatchList? '../../../assets/images/bookmarked-selected.svg' : '../../../assets/images/bookmarked-shape.svg'"
+                            class="bookmark">
+                    </span>
+                    <span class="watched-container" (click)="onPress(itemIndex, !item.isWatched, $event)">
+                        <img [src]="item.isWatched ? '../assets/images/eye-selected.svg' : '../assets/images/eye.svg'"
+                            class="watched" alt="">
+                    </span>
+                </div>
+            </ion-slide>
+        </ion-slides>
+    </ng-container>
+    <ng-container *ngIf="sliderConfiguration?.type === 'preview-desc'">
+        <ion-slides #slides (ionSlideReachEnd)="reachEnd($event)" [options]="sliderConfiguration?.sliderOptions" class="preview-desc-slides">
+            <ion-slide *ngFor="let item of sliderConfiguration?.items; index as itemIndex" class="slide">
+                <div class="container">
+                    <div class="image">
+                        <img (click)="itemClick.emit(item.name)"
+                            [src]="item.imageSrc ? item.imageSrc : '../../../assets/images/default-poster.png'">
+                        <!-- <span class="watchlist-container" (click)="addToMovieSeriesWatchlist(itemIndex, !item.inWatchList, $event)">
+                            <img [src]="item.inWatchList? '../../../assets/images/bookmarked-selected.svg' : '../../../assets/images/bookmarked-shape.svg'"
+                                class="bookmark">
+                        </span>
+                        <span class="watched-container" (click)="onPress(itemIndex, !item.isWatched, $event)">
+                            <img [src]="item.isWatched ? '../assets/images/eye-selected.svg' : '../assets/images/eye.svg'"
+                                class="watched" alt="">
+                        </span> -->
+                    </div>
+                    <p (click)="itemClick.emit(itemIndex)" class="name notranslate">{{item.name}}</p>
+                    <!-- <span (click)="itemClick.emit(itemIndex)" *ngIf="item.description"
+                        class="description">{{item.description}}</span>
+                    <span (click)="itemClick.emit(itemIndex)" *ngIf="item.rating !== null && item.rating !== undefined"
+                        class="rating"><img src="../../../assets/images/rate.svg">{{item.rating}}</span> -->
+                </div>
+            </ion-slide>
+        </ion-slides>
+    </ng-container>
+</ng-container>
+
+<ng-container *ngIf="sliderConfiguration?.orientation === 'vertical'">
+    <div class="card-layout">
+        <div class="container" *ngFor="let item of sliderConfiguration?.items; index as itemIndex">
+            <div class="image">
+                <img (click)="itemClick.emit(itemIndex)"
+                    [src]="item.imageSrc ? item.imageSrc : '../../../assets/images/default-poster.png'">
+                <span class="watchlist-container" (click)="addToMovieSeriesWatchlist(itemIndex, !item.inWatchList, $event)">
+                    <img [src]="item.inWatchList ? '../../../assets/images/bookmarked-selected.svg' : '../../../assets/images/bookmarked-shape.svg'"
+                        class="bookmark">
+                </span>
+                <span class="watched-container" (click)="onPress(itemIndex, !item.isWatched, $event)">
+                    <img [src]="item.isWatched ? '../assets/images/eye-selected.svg' : '../assets/images/eye.svg'"
+                        class="watched" alt="">
+                </span>
+            </div>
+            <p class="name notranslate" (click)="itemClick.emit(itemIndex)">{{item.name}}</p>
+            <span class="description" (click)="itemClick.emit(itemIndex)">{{item.description}}</span>
+            <span *ngIf="item.rating" (click)="itemClick.emit(itemIndex)" class="rating"><img
+                    src="../../../assets/images/rate.svg">{{item.rating}}</span>
+        </div>
+    </div>
+    <ion-infinite-scroll #IonInfiniteScroll *ngIf="sliderConfiguration?.items.length > 0" threshold="20px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content>
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+</ng-container>
