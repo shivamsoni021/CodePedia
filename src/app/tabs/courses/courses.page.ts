@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HomeTechnology } from 'src/app/interfaces/home-technology.interface';
+import { LoadingService } from 'src/app/services/loading.service';
 import { DatabaseService, CourseData } from '../../database/database.service';
 
 @Component({
@@ -17,8 +18,11 @@ export class CoursesPage implements OnInit {
     slidesPerView: 2,
   }
   selectData: string;
-  constructor(private databaseService: DatabaseService,
-    private router: Router) { }
+  constructor(
+    private databaseService: DatabaseService,
+    private router: Router,
+    private loadingService: LoadingService
+    ) { }
 
   ngOnInit() {
     
@@ -43,6 +47,7 @@ export class CoursesPage implements OnInit {
   }
 
   navigateToCoursePage(courseDetails: HomeTechnology): void {
+    this.loadingService.showLoader();
     this.router.navigate(["tabs/courses/course-details"], {
         state: {
             courseDetails

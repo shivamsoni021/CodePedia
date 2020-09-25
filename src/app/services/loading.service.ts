@@ -30,7 +30,7 @@ export class LoadingService {
     }
 
     // Hide the loader if already created otherwise return error
-    hideLoader() {
+    async hideLoader() {
 
         this.loadingController.dismiss().then((res) => {
             console.log('Loading dismissed!', res);
