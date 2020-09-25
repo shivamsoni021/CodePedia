@@ -25,6 +25,36 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+$font-family-path: 'assets/fonts';
+
+@mixin font-face($familyName, $initial, $variant) {
+        @font-face {
+            font-family: $familyName;
+            src: url('#{$font-family-path}/#{$initial}-#{$variant}.ttf') format('truetype');
+        }
+}
+
+@include font-face(Nunito-semibold, Nunito, SemiBold);
+@include font-face(Nunito-bold, Nunito, Bold);
+@include font-face(Nunito-Black, Nunito, Black);
+@include font-face(Nunito-BlackItalic, Nunito, BlackItalic);
+@include font-face(Nunito-BoldItalic, Nunito, BoldItalic);
+@include font-face(Nunito-ExtraBold, Nunito, ExtraBold);
+@include font-face(Nunito-ExtraBoldItalic, Nunito, ExtraBoldItalic);
+@include font-face(Nunito-ExtraLight, Nunito, ExtraLight);
+@include font-face(Nunito-ExtraLightItalic, Nunito, ExtraLightItalic);
+@include font-face(Nunito-Italic, Nunito, Italic);
+@include font-face(Nunito-Light, Nunito, Light);
+@include font-face(Nunito-LightItalic, Nunito, LightItalic);
+@include font-face(Nunito-Regular, Nunito, Regular);
+@include font-face(Nunito-semiboldItalic, Nunito, SemiBoldItalic);
+
+
+* {
+    font-family: 'Nunito-Regular';
+}
+
+
 ion-toolbar {
     --background: var(--color-black);
     --border-width: 0;
