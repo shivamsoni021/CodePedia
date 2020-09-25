@@ -1,9 +1,32 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>course-details</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+<img class="subject-img" [src]="imageUrl" />
+<h5>Description</h5>
+  <ion-item lines="none">
+    <ion-icon slot="start" name="star"></ion-icon>
+    <ion-label>{{courseDetails.atDescription}}</ion-label>
+  </ion-item>
+<h5>What you'll Learn</h5>
+<div *ngFor="let currentwlearn of wlearn">
+<ion-item lines="none">
+  <ion-icon slot="start" name="star"></ion-icon>
+  <ion-label>{{ currentwlearn }}</ion-label>
+</ion-item>
+</div>
 
+<h5>Requirement</h5>
+<div *ngFor="let curRequirement of requirements">
+<ion-item lines="none">
+  <ion-icon slot="start" name="star"></ion-icon>
+  <ion-label>{{ curRequirement }}</ion-label>
+</ion-item>
+</div>
+
+<h5>Benefits</h5>
+<div *ngFor="let benefits of benefits">
+<ion-item lines="none">
+  <ion-icon slot="start" name="star"></ion-icon>
+  <ion-label>{{ benefits }}</ion-label>
+</ion-item>
+</div>
+<ion-button (click)="enrollCourse()" expand="block">Enroll Now</ion-button>
 </ion-content>

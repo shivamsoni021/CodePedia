@@ -20,6 +20,10 @@ export class DatabaseService {
     technologyData: any;
     allTechnology: HomeTechnology[] = new Array();
     courseData: CourseData[] = new Array();
+    courseId:string="";
+    xp: number;
+    totalXp :string;
+    courseStudying : string[]=new Array();
 
     constructor(private http: HttpClient) {
     }
@@ -31,7 +35,7 @@ export class DatabaseService {
 
                 this.http.get(`https://codeshala-6dd34.firebaseio.com/courses/homescreen/t${i}.json`).subscribe((languageData: any) => {
 
-                    this.homeTechnologyArray.push({ name: languageData.name, description: languageData.description, imageUrl: languageData.imageUrl });
+                    this.homeTechnologyArray.push({id:languageData.id , name: languageData.name, atDescription: languageData.description, imageUrl: languageData.imageUrl , wlearn: languageData.wlearn , requirement: languageData.requirement , benefits: languageData.benefits});
 
                 });
             }
@@ -40,37 +44,25 @@ export class DatabaseService {
         return this.homeTechnologyArray;
     }
 
-    // getAllCourses() {
-    //     this.http.get(`${BASE_URL}/${ENDPOINTS.ALL_TECHNOLOGY}.json`)
-    //         .subscribe((resData: any) => {
-
-    //             this.technologyNumber = resData.atNumber;
-    //             this.technologyData = resData;
-    //             console.log(resData);
-    //             for (let i = 1; i <= this.technologyNumber; i++) {
-    //                 this.http.get(`${BASE_URL}/${ENDPOINTS.ALL_TECHNOLOGY}/aT${i}.json`)
-    //                     .subscribe((data: any) => {
-    //                         console.log(data);
-    //                         this.technologyData = data;
-    //                         this.allTechnology.push({ name: data.atName, description: data.atDescription, imageUrl: data.imageUrl });
-    //                     });
-    //             }
-
-
-    //         })
-    //     console.log(this.courseData);
-    //     return {
-    //         technologyData: this.technologyData,
-    //         allTechnology: this.allTechnology
-    //     };
-
-    // }
-
     getAllCourses() {
         return this.http.get(`${BASE_URL}/${ENDPOINTS.ALL_TECHNOLOGY}.json`);
     }
 
-    getCoursesData() {
+    getEnrolledCourse(userID :string , courseId:string){
+
+        return this.http.get(`https://codeshala-6dd34.firebaseio.com/users/${userID}.json`);
+    
+    }
+    
+    enrollCourse(userID : string,courseId:string){
+    
+        return this.http.post(`https://codeshala-6dd34.firebaseio.com/users/${userID}/courseStudying.json`,
+            {courseId});
 
     }
+
+    isStudying(userID:string){
+        return this.http.get(`https://codeshala-6dd34.firebaseio.com/users/${userID}/courseStudying.json`);
+    }
+
 }

@@ -18,6 +18,9 @@ export interface AuthResponseData{
 })
 export class AuthService{
     
+    currentuserId : string ;
+    responseData : Observable<AuthResponseData>;
+
     private _user = new BehaviorSubject<User>(null);
  
     get userIsAuthenticated(){
@@ -45,16 +48,20 @@ export class AuthService{
     constructor(private http : HttpClient){}
 
     signup(email:string , password:string){
-       return this.http.post<AuthResponseData>(
+     
+        this.responseData = this.http.post<AuthResponseData>(
             `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebaseApiKey}`,
             {email : email, password: password , returnSecureToken : true, token: environment.firebaseApiKey})
             .pipe(tap(this.setUserData.bind(this)));
-    }
+        
+        return this.responseData;    
+        }
 
     login(email:string , password:string){
         return this.http.post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebaseApiKey}`,
         {email: email , password : password , returnSecureToken : true })
         .pipe(tap(this.setUserData.bind(this)));
+   
     }
 
     logOut(){
@@ -68,8 +75,26 @@ export class AuthService{
     
     }
 
+    pushData(email:string , uid: string){
+         
+        return this.http.put(`https://codeshala-6dd34.firebaseio.com/users/${uid}.json`,{
+            email:email , name:"", xp:"" ,badges : "" , coursesCompleted : "" , courseStudying:"" ,imageUrl:""});
+    }
+
+    getUserData(userId:string){
+        return this.http.get(`https://codeshala-6dd34.firebaseio.com/users/${userId}.json`);
+    }
 
     getData(userId : string){
        return this.http.get('https://codeshala-6dd34.firebaseio.com/trial.json');
+    }
+
+    setUserId(userId:string){
+        this.currentuserId = userId;
+    }
+    
+    getUserId(){
+
+        return this.currentuserId;
     }
 }
