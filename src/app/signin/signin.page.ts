@@ -47,6 +47,7 @@ export class SigninPage implements OnInit {
       authObs.subscribe(resData => {
         this.isLoading = false;
         loadingEl.dismiss();
+        this.authService.setUserId(resData.localId);
         console.log(resData.localId);
 
         this.authService.getData("sfsa").subscribe(resData =>

@@ -55,7 +55,10 @@ export class SignupPage implements OnInit {
                 this.authService.signup(this.email, this.password).subscribe(resData => {
                     this.isLoading = false;
                     loadingEl.dismiss();
-
+                    
+                    this.authService.pushData(this.email , resData.localId).subscribe(resData =>{
+                        
+                    });
                     this.navigateToHomePage();
 
                 },
@@ -70,7 +73,10 @@ export class SignupPage implements OnInit {
                         }
                         this.alertService.showAlert('Authentication Failed', message);
                     });
+
+
             });
+
     }
 
     navigateBack() {
