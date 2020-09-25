@@ -5,23 +5,31 @@
   </ion-header>
   
   <ion-content>
-      <ion-list class="blog-list">
-          <ion-item *ngFor="let blog of blogsList" >
-              <ion-thumbnail (click)="navigateToBlogDetailsPage(blog)" class="post-image" slot="start">
-                  <ion-img [src]="blog.image"></ion-img>
-                </ion-thumbnail>
-             <ion-label>
-                 <div (click)="navigateToBlogDetailsPage(blog)">
-                    <h5>{{blog.tag}}</h5>
-                     <h4 class="post-title">{{blog.postTitle}}</h4>
-                  </div>
-                 <small class="post-credit">
-                  Posted by {{ blog.authorName }} &bull; on
-                  {{ blog.timePublished | date: "shortDate" }}
-                </small>
-                <ion-icon (click)="addToBookmark(blog)" [ngClass]="{'bookmarked': blog.isBookmarked}" name="star" slot="end"></ion-icon>
-             </ion-label>
-          </ion-item>
-      </ion-list>
+
+    <div class="all-post">
+        <h5>Latest Posts</h5>
+    </div>
+      <ion-card *ngFor="let blog of blogsList" class="blog-list">
+        <!-- <ion-thumbnail class="post-image" slot="start"> -->
+            <img class="blog-image" [src]="blog.image">
+          <!-- </ion-thumbnail> -->
+          
+          <ion-card-content class="blog-tag">
+            <h6>{{blog.tag}}</h6>
+          </ion-card-content>
+          <ion-card-header class="blog-header">
+            <ion-card-title>
+                <h4>
+                    {{blog.postTitle}}
+                </h4></ion-card-title>
+          </ion-card-header>
+          <ion-card-content class="blog-footer">
+           <small>
+
+               Posted by {{ blog.authorName }} &bull; on
+               {{ blog.timePublished | date: "shortDate" }}
+            </small> 
+          </ion-card-content>
+      </ion-card>
   </ion-content>
   

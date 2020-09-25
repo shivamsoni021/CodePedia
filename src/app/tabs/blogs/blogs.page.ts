@@ -24,7 +24,7 @@ export class BlogsPage {
     ) { }
 
     ionViewWillEnter() {
-        this.loadingService.showLoader();
+       // this.loadingService.showLoader();
         this.getBlogData();
     }
 
