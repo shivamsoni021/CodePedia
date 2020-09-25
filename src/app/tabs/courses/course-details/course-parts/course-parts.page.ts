@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 interface Parts{
   partName:string;
@@ -14,7 +15,7 @@ export class CoursePartsPage implements OnInit {
 
   courseDetails;
   courseParts:Parts[] = new Array();
-  constructor() { }
+  constructor(private router : Router) { }
 
   ngOnInit() {
     this.courseDetails = window.history.state.courseDetails;
@@ -36,5 +37,14 @@ export class CoursePartsPage implements OnInit {
 
       
     }
+  }
+  
+  navigateToSectionPage(currentPart:Parts){
+
+    this.router.navigate(["tabs/courses/course-details/course-parts"],{
+      state:{
+          currentPart
+      }
+    });
   }
 }

@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let parts of courseParts">
+  <ion-card *ngFor="let parts of courseParts" (click)="navigateToSectionPage(parts)">
     <h3>{{ parts.partName }}</h3>
       <li *ngFor="let points of parts.partsPoint | keyvalue">
           <ul>{{ points.value }}</ul>
