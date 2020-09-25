@@ -6,6 +6,7 @@ export class HomeTechnology{
     benefits: string;
     wlearn: string;
     requirement: string;
+    parts?: string[];
 
     constructor(id:string , name :string, description :string , imageUrl :string, wlearn: string , requirement: string,
         benefits:string){

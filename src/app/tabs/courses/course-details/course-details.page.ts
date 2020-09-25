@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DatabaseService } from 'src/app/database/database.service';
 import { HomeTechnology } from 'src/app/interfaces/home-technology.interface';
+import { LoadingService } from 'src/app/services/loading.service';
 import { AuthService } from 'src/auth/auth.service';
 interface CourseData{
   courseId:string[];
@@ -23,22 +25,28 @@ export class CourseDetailsPage implements OnInit {
   courseStudying:CourseData[]= new Array();
 
   constructor(private authService: AuthService,
-    private databaseService: DatabaseService) { }
+    private databaseService: DatabaseService,
+    private router: Router,
+    private loadingService: LoadingService) { }
 
   ngOnInit() {
+    this.loadingService.showLoader();
     this.courseDetails = window.history.state.courseDetails;
     this.userId = this.authService.getUserId();
-    this.setAllValues();
+    this.id = this.courseDetails.id;
     this.databaseService.isStudying(this.userId).subscribe((resData:any)=>{
       for(const course in resData){
         this.courseStudying.push(resData[course]);
         
       }  
-      this.courseStudying.forEach(function (value) {
-        console.log(value);
+      this.courseStudying.forEach((value: any) => {
+          
+        this.isStudying(value);
+        
       }); 
+      
   });
-    this.isStudying();
+  this.setAllValues();
   }
 
   setAllValues(){
@@ -57,9 +65,25 @@ export class CourseDetailsPage implements OnInit {
   });
   }
 
-  isStudying(){
-    console.log("ss");
+  isStudying(value : any):boolean{
     
+    if(value.courseId == this.id){
+        console.log(value.courseId);
+        this.navigateToCoursePage(this.courseDetails.parts);
+    }
+    else{
+        return false;
+    }
     
   }
+
+  navigateToCoursePage(courseDetails: any): void {
+    this.loadingService.hideLoader();
+    this.router.navigate(["tabs/courses/course-details/course-parts"], {
+        state: {
+            courseDetails
+        }
+    });
+}
+
 }
