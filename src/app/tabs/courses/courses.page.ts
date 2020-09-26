@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵConsole } from '@angular/core';
 import { Router } from '@angular/router';
+import { SegmentChangeEventDetail } from '@ionic/core';
 import { HomeTechnology } from 'src/app/interfaces/home-technology.interface';
 import { DatabaseService, CourseData } from '../../database/database.service';
 
@@ -22,6 +23,10 @@ export class CoursesPage implements OnInit {
 
   ngOnInit() {
     
+  }
+
+  segmentChanged(event: CustomEvent<SegmentChangeEventDetail>){
+    console.log(event.detail);
   }
 
   ionViewWillEnter() {
