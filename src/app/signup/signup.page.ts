@@ -2,9 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-import { AuthService, AuthResponseData } from '../../auth/auth.service';
+import { AuthService } from '../../auth/auth.service';
 import { LOGIN_ERROR_CODES } from '../constants/app.constants';
 import { AlertService } from '../services/alert.service';
+import { StorageService } from '../services/storage.service';
 
 @Component({
     selector: 'app-signup',
@@ -25,18 +26,15 @@ export class SignupPage implements OnInit {
         private authService: AuthService,
         private loadingController: LoadingController,
         private router: Router,
-        private alertService: AlertService
-    ) {}
+        private alertService: AlertService,
+        private storageService: StorageService
+    ) { }
 
-    ngOnInit() {
-
-    }
+    ngOnInit() { }
 
     onClicked() {
         this.isClicked = true;
-        console.log(this.isClicked);
-        this.email = this.form.value['email'];
-        console.log(this.email);
+        this.email = this.form.value.email;
     }
 
     navigateToHomePage() {
@@ -45,7 +43,7 @@ export class SignupPage implements OnInit {
 
     onSubmit(form: NgForm) {
         this.isLoading = true;
-        this.password = this.form.value['password'];
+        this.password = this.form.value.password;
 
         this.loadingController.create({ keyboardClose: true, message: 'Registering' })
             .then(loadingEl => {
@@ -55,10 +53,9 @@ export class SignupPage implements OnInit {
                 this.authService.signup(this.email, this.password).subscribe(resData => {
                     this.isLoading = false;
                     loadingEl.dismiss();
-                    
-                    this.authService.pushData(this.email , resData.localId).subscribe(resData =>{
-                        
-                    });
+
+                    this.authService.pushData(this.email, resData.localId).subscribe(() => { });
+                    this.storageService.setUserdetailsToStorage({ username: this.email, password: this.password });
                     this.navigateToHomePage();
 
                 },
@@ -73,8 +70,6 @@ export class SignupPage implements OnInit {
                         }
                         this.alertService.showAlert('Authentication Failed', message);
                     });
-
-
             });
 
     }
