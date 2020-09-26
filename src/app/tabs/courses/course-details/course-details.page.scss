@@ -1,4 +1,16 @@
-.subject-img{
-    width:100%;
+.image{
+    text-align: center;
+    margin-top: 20px;
+    .subject-img{
+        width:200px;
+        height: 200px;
+    }
+}
 
+ion-content {
+    padding: 16px !important;
+    ion-icon {
+        font-size: 20px;
+        margin-right: 12px;
+    }
 }
