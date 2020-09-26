@@ -55,4 +55,8 @@ export class CoursesPage implements OnInit {
         });
     }
     segmentChanged() { }
+
+    ionViewDidLeave() {
+        this.allTechnology = [];
+    }
 }
