@@ -5,8 +5,9 @@ import { SliderConfiguration, SliderType, SliderOrientation } from 'src/app/comp
     providedIn: 'root'
 })
 export class CoursesFormatterService {
-    constructor() {}
-    
+
+    constructor() { }
+
     getFormattedCoursesData(data) {
         const formattedData: SliderConfiguration = {
             type: SliderType.PreviewWithDescription,
@@ -20,11 +21,14 @@ export class CoursesFormatterService {
         };
         data.forEach(filteredItem => {
             formattedData.items.push({
-                uniqueId: filteredItem.id,
+                id: filteredItem.id,
                 type: 'course',
                 imageSrc: filteredItem.imageUrl,
                 name: filteredItem.atName,
                 description: filteredItem.atDescription,
+                requirement: filteredItem.requirement,
+                benefits: filteredItem.benefits,
+                wlearn: filteredItem.wlearn
             });
         });
         return formattedData;

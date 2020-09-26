@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HomeTechnology } from 'src/app/interfaces/home-technology.interface';
-import { LoadingService } from 'src/app/services/loading.service';
-import { DatabaseService, CourseData } from '../../database/database.service';
+import { DatabaseService } from '../../database/database.service';
 import { CoursesFormatterService } from './services/courses-formatter.service';
 import { SliderConfiguration } from 'src/app/components/slider/constants/slider.constant';
 
@@ -23,7 +22,7 @@ export class CoursesPage implements OnInit {
         private databaseService: DatabaseService,
         private router: Router,
         private coursesFormatterService: CoursesFormatterService
-        ) { }
+    ) { }
 
     ngOnInit() {
 
@@ -38,12 +37,9 @@ export class CoursesPage implements OnInit {
             // tslint:disable-next-line: forin
             for (const courses in allCourses) {
                 this.allTechnology.push(allCourses[courses]);
-                console.log(allCourses[courses]);
             }
-            console.log(this.allTechnology);
-            console.log(this.allTechnology.length)
             this.allTechnologySliderConfig = this.coursesFormatterService.getFormattedCoursesData(this.allTechnology);
-    })
+        });
     }
 
     public test(event, item) {

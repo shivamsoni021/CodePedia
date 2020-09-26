@@ -20,7 +20,7 @@
         </h5> 
         </ion-label>
     </ion-item>
-    <app-slider [sliderConfiguration]="allTechnologySliderConfig"></app-slider>
+    <app-slider (itemClick)="navigateToCoursePage($event)" [sliderConfiguration]="allTechnologySliderConfig"></app-slider>
     <!-- <ion-slides pager="false" [options]="slideOpts">
       <ion-slide *ngFor="let technology of allTechnology">
         <ion-card (click)="navigateToCoursePage(technology)">

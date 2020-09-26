@@ -15,7 +15,7 @@ export enum SliderOrientation {
 
 /** Slider item interface */
 export interface SliderItem {
-    uniqueId: string;
+    id: string;
     type: 'tag' | 'course';
     imageSrc?: string;
     imageClass?: string;
@@ -30,6 +30,9 @@ export interface SliderItem {
     inWatchList?: boolean;
     isWatched?: boolean;
     mediaUuid?: string;
+    requirement?: string;
+    benefits?: string;
+    wlearn?: string;
 }
 
 /** Slider configuration interface for slider component */

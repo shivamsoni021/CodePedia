@@ -64,19 +64,18 @@ export class BlogsPage {
         this.tagList = this.blogFormatterService.getFormattedBlogTagList();
     }
 
-    loadDataByTagName(tagName: string) {
+    loadDataByTagName(tagName: any) {
         this.loadingService.showLoader();
-        this.blogService.loadBlogByTagName(tagName).subscribe(blogListByTagName => {
+        this.blogService.loadBlogByTagName(tagName.name).subscribe(blogListByTagName => {
             const blogList = [];
             // tslint:disable-next-line: forin
             for (const blog in blogListByTagName) {
                 blogList.push(blogListByTagName[blog]);
             }
-            console.log(blogList)
             this.router.navigate([NAVIGATION_PATHS.BLOG_TAG_LIST], {
                 state: {
                     blogList,
-                    tagName
+                    tagName: tagName.name
                 }
             });
         });

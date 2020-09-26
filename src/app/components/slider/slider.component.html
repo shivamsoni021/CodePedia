@@ -22,7 +22,7 @@
             <ion-slide *ngFor="let item of sliderConfiguration?.items; index as itemIndex" class="slide">
                 <div class="container">
                     <div class="image" [ngClass]="{'course-image' : item.type === 'course'}">
-                        <img (click)="itemClick.emit(item.name)"
+                        <img (click)="itemClick.emit(item)"
                             [src]="item.imageSrc ? item.imageSrc : '../../../assets/images/default-poster.png'">
                         <!-- <span class="watchlist-container" (click)="addToMovieSeriesWatchlist(itemIndex, !item.inWatchList, $event)">
                             <img [src]="item.inWatchList? '../../../assets/images/bookmarked-selected.svg' : '../../../assets/images/bookmarked-shape.svg'"
