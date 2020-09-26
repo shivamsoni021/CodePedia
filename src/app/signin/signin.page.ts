@@ -87,5 +87,9 @@ export class SigninPage implements OnInit {
         this.show = !this.show;
     }
 
+    navigateToSignUpPage() {
+        this.router.navigate(['signup']);
+    }
+
 
 }
