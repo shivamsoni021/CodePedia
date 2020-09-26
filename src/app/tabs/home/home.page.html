@@ -1,49 +1,63 @@
 <ion-content>
 
-  <div><img src="assets\icon\codeshala_home.png"/></div>
+    <div><img src="assets\icon\codeshala_home.png" /></div>
 
-  <div *ngIf="!isStudying" class="studying">
-    <ion-item lines="none" class="technology-title">
-      <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
-     <ion-label>Studying</ion-label>
-    </ion-item>
-    <ion-slides pager="false" [options]="slideOpts">
-      <ion-slide *ngFor="let technology of technologies">
-    <ion-card>
-  
-      <ion-img width="200" height= "200" [src]="technology.imageUrl"></ion-img>
-      <ion-card-header>
-        <ion-card-subtitle>{{ technology.description }}</ion-card-subtitle>
-        <ion-card-title>Madison, WI</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        
-      </ion-card-content>
-    </ion-card>
-  </ion-slide>
-  </ion-slides>
-  </div>
+    <div *ngIf="!isStudying" class="studying">
+        <ion-item lines="none" class="technology-title">
+            <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+            <ion-label class="all-post">
+                <h5>
+                    Studying
+                </h5>
+            </ion-label>
+        </ion-item>
+        <app-slider (itemClick)="navigateToCoursePage($event)" [sliderConfiguration]="technologies"></app-slider>
+        <!-- <ion-slides pager="false" [options]="slideOpts">
+            <ion-slide *ngFor="let technology of technologies">
+                <ion-card>
 
-  <div class="technologies">
-  <ion-item lines="none" class="technology-title">
-    <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
-   <ion-label *ngIf="!isStudying">Start Learning</ion-label>
-   <ion-label *ngIf="isStudying">Learn New Skill</ion-label>
-  </ion-item>
-  <ion-slides pager="false" [options]="slideOpts">
-    <ion-slide *ngFor="let technology of technologies">
-  <ion-card>
+                    <ion-img width="200" height="200" [src]="technology.imageUrl"></ion-img>
+                    <ion-card-header>
+                        <ion-card-subtitle>{{ technology.description }}</ion-card-subtitle>
+                        <ion-card-title>Madison, WI</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
 
-    <ion-img width="200" height= "200" [src]="technology.imageUrl"></ion-img>
-    <ion-card-header>
-      <ion-card-subtitle>{{ technology.description }}</ion-card-subtitle>
-      <ion-card-title>Madison, WI</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      
-    </ion-card-content>
-  </ion-card>
-</ion-slide>
-</ion-slides>
-</div>
+                    </ion-card-content>
+                </ion-card>
+            </ion-slide>
+        </ion-slides> -->
+    </div>
+
+    <div class="technologies">
+        <ion-item lines="none" class="technology-title">
+            <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+            <ion-label *ngIf="!isStudying" class="all-post">
+                <h5>
+                    Start Learning
+                </h5>
+            </ion-label>
+            <ion-label *ngIf="isStudying" class="all-post">
+                <h5>
+                    Learn New Skill
+                </h5>
+            </ion-label>
+        </ion-item>
+        <app-slider (itemClick)="navigateToCoursePage($event)" [sliderConfiguration]="technologies"></app-slider>
+        <!-- <ion-slides pager="false" [options]="slideOpts">
+            <ion-slide *ngFor="let technology of technologies">
+                <ion-card>
+
+                    <ion-img width="200" height="200" [src]="technology.imageUrl"></ion-img>
+                    <ion-card-header>
+                        <ion-card-subtitle>{{ technology.description }}</ion-card-subtitle>
+                        <ion-card-title>Madison, WI</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+
+                    </ion-card-content>
+                </ion-card>
+            </ion-slide>
+        </ion-slides> -->
+    </div>
 </ion-content>
