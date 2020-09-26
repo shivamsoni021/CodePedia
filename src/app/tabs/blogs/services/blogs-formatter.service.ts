@@ -5,8 +5,12 @@ import { SliderConfiguration, SliderType, SliderOrientation } from 'src/app/comp
     providedIn: 'root'
 })
 export class BlogFormatterService {
+    /** @ignore */
     constructor() { }
 
+    /**
+     * This method is used for getting formatted list of tags
+     */
     getFormattedBlogTagList(): SliderConfiguration {
         return {
             type: SliderType.PreviewWithDescription,
