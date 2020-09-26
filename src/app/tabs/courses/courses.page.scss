@@ -1,10 +1,23 @@
-ion-segment{
-    border-radius:1.2rem;
-    width:60%;
-    margin:auto;
-    margin-top: 0.7rem;
-
-    ion-segment-button{
-        border-radius:1.2rem;    
+ion-segment {
+    border-radius: 40px;
+    margin: 16px auto;
+    width: 80%;
+    --background: var(--ion-color-tertiary);
+    color: white;
+    ion-segment-button {
+        --border-radius: 40px;
+        --margin-end: 16px;
+        --margin-start: 16px;
+        button {
+            background: var(--ion-color-tertiary);
+        }
+        &.segment-button-checked {
+            --background: var(--ion-color-tertiary);
+            --indicator-color: white;
+            color: black;
+        }
     }
+}
+ion-item {
+    --padding-start: 0;
 }

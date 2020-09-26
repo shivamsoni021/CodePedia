@@ -1,0 +1,35 @@
+.blog-list {
+    .blog-footer {
+      padding-bottom: 13px;
+    }
+    .blog-tag {
+      padding-bottom: 0 !important;
+      h6{
+          font-family: 'Nunito-Italic';
+      }
+          
+    }
+    .blog-header {
+      padding: 0 16px;
+      ion-card-title {
+        h4 {
+          font-size: 1.1rem;
+          font-family: "Nunito-semibold";
+        }
+      }
+    }
+    .blog-image {
+      width: 360px;
+      height: 160px;
+    }
+  }
+  
+  .all-post{
+      padding: 0 16px;
+      h5{
+          border-left: 5px solid #900c3f;
+          font-family: Nunito-BoldItalic;
+          padding: 5px;
+      }
+  }
+  

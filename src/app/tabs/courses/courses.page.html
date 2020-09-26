@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
+    <ion-title  class="ion-text-center code-shala-header-title">
       Courses
     </ion-title>
   </ion-toolbar>
@@ -14,9 +14,14 @@
   <div class="programming-language">
     <ion-item lines="none" class="technology-title">
       <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
-      <ion-label>Programming Languages</ion-label>
+      <ion-label class="all-post">
+        <h5>
+            Programming Languages
+        </h5> 
+        </ion-label>
     </ion-item>
-    <ion-slides pager="false" [options]="slideOpts">
+    <app-slider (itemClick)="navigateToCoursePage($event)" [sliderConfiguration]="allTechnologySliderConfig"></app-slider>
+    <!-- <ion-slides pager="false" [options]="slideOpts">
       <ion-slide *ngFor="let technology of allTechnology">
         <ion-card (click)="navigateToCoursePage(technology)">
           <ion-img width="200" height="200" [src]="technology.imageUrl"></ion-img>
@@ -29,15 +34,17 @@
           </ion-card-content>
         </ion-card>
       </ion-slide>
-    </ion-slides>
+    </ion-slides> -->
   </div>
 
   <div class="trending-language">
     <ion-item lines="none" class="technology-title">
       <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
-      <ion-label>Trending Technologies</ion-label>
+      <ion-label class="all-post"> <h5>Trending Technologies</h5></ion-label>
     </ion-item>
-    <ion-slides pager="false" [options]="slideOpts">
+    
+    <app-slider [sliderConfiguration]="allTechnologySliderConfig"></app-slider>
+    <!-- <ion-slides pager="false" [options]="slideOpts">
       <ion-slide *ngFor="let technology of allTechnology">
         <ion-card>
 
@@ -51,15 +58,17 @@
           </ion-card-content>
         </ion-card>
       </ion-slide>
-    </ion-slides>
+    </ion-slides> -->
   </div>
 
   <div class="web-technologies">
     <ion-item lines="none" class="technology-title">
       <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
-      <ion-label>Web Technologies</ion-label>
+      <ion-label class="all-post"> <h5>Web Technologies</h5></ion-label>
     </ion-item>
-    <ion-slides pager="false" [options]="slideOpts">
+    
+    <app-slider [sliderConfiguration]="allTechnologySliderConfig"></app-slider>
+    <!-- <ion-slides pager="false" [options]="slideOpts">
       <ion-slide *ngFor="let technology of allTechnology">
         <ion-card>
 
@@ -73,15 +82,17 @@
           </ion-card-content>
         </ion-card>
       </ion-slide>
-    </ion-slides>
+    </ion-slides> -->
   </div>
 
   <div class="scripting-language">
     <ion-item lines="none" class="technology-title">
       <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
-      <ion-label>Scripting Languages</ion-label>
+      <ion-label class="all-post"> <h5>Scripting Languages</h5></ion-label>
     </ion-item>
-    <ion-slides pager="false" [options]="slideOpts">
+    
+    <app-slider [sliderConfiguration]="allTechnologySliderConfig"></app-slider>
+    <!-- <ion-slides pager="false" [options]="slideOpts">
       <ion-slide *ngFor="let technology of allTechnology">
         <ion-card>
 
@@ -95,6 +106,6 @@
           </ion-card-content>
         </ion-card>
       </ion-slide>
-    </ion-slides>
+    </ion-slides> -->
   </div>
 </ion-content>
