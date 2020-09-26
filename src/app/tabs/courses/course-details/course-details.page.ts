@@ -30,7 +30,7 @@ export class CourseDetailsPage implements OnInit {
     private loadingService: LoadingService) { }
 
   ngOnInit() {
-    this.loadingService.showLoader();
+    
     this.courseDetails = window.history.state.courseDetails;
     this.userId = this.authService.getUserId();
     this.id = this.courseDetails.id;
@@ -44,8 +44,9 @@ export class CourseDetailsPage implements OnInit {
         this.isStudying(value);
         
       }); 
-      
+      this.loadingService.hideLoader(); 
   });
+  
   this.setAllValues();
   }
 
@@ -56,6 +57,7 @@ export class CourseDetailsPage implements OnInit {
     this.benefits = this.courseDetails.benefits.split("TOSPLIT");
     this.wlearn = this.courseDetails.wlearn.split("TOSPLIT");
     this.id = this.courseDetails.id;
+    
   }
 
   enrollCourse(){

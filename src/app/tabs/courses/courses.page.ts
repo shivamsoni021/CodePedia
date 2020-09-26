@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HomeTechnology } from 'src/app/interfaces/home-technology.interface';
+import { LoadingService } from 'src/app/services/loading.service';
 import { DatabaseService, CourseData } from '../../database/database.service';
 import { CoursesFormatterService } from './services/courses-formatter.service';
+import { SliderConfiguration } from 'src/app/components/slider/constants/slider.constant';
 
 @Component({
     selector: 'app-courses',
@@ -14,12 +16,9 @@ export class CoursesPage implements OnInit {
     allTechnology: HomeTechnology[] = new Array();
     coursesData: any;
     obsData: any;
-    slideOpts = {
-        slidesPerView: 2,
-    }
     selectData: string;
+    allTechnologySliderConfig: SliderConfiguration;
 
-    allTechnologySliderConfig;
     constructor(
         private databaseService: DatabaseService,
         private router: Router,
@@ -52,7 +51,7 @@ export class CoursesPage implements OnInit {
     }
 
     navigateToCoursePage(courseDetails: HomeTechnology): void {
-        this.router.navigate(["tabs/courses/course-details"], {
+        this.router.navigate(['tabs/courses/course-details'], {
             state: {
                 courseDetails
             }

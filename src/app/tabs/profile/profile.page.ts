@@ -24,7 +24,7 @@ export class ProfilePage implements OnInit {
   isBadges=true;
   constructor(private authService : AuthService,
   private profileService : ProfileService) { }
-  userId="IdYGlxLGlpfZU2ivcQS3eVuklcI2";
+  userId="";
   coursesCompleted:string[];
   coursesStudying:string[];
   badgesImageUrl:string[];
@@ -36,7 +36,7 @@ export class ProfilePage implements OnInit {
   badgeArray:{badgeName:string , badgeImage:string}[]=new Array();
 
   ngOnInit() {
-    // this.userId=this.authService.getUserId();
+    this.userId=this.authService.getUserId();
     console.log(this.userId);
     this.profileService.getUserProfileData(this.userId).subscribe((resData:any)=>{
         
@@ -51,7 +51,7 @@ export class ProfilePage implements OnInit {
 
   setAllValues(profileData : any){
     this.coursesCompleted = profileData.coursesCompleted.split(",");
-    this.coursesStudying = profileData.courseStudying.split(",");
+    // this.coursesStudying = profileData.courseStudying.split(",");
     this.badges = profileData.badges.split(",");
     this.badgesImageUrl = profileData.badgesImagesUrl.split("TOSPLIT");
     this.name = profileData.name;
