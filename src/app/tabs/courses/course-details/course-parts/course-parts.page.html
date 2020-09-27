@@ -1,12 +1,6 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>course-parts</ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let parts of courseParts" (click)="navigateToSectionPage(parts)">
-    <h3>{{ parts.partName }}</h3>
+  <ion-card *ngFor="let parts of courseParts" (click)="navigateToSectionPage(parts.partsPoint , parts.id)">
       <li *ngFor="let points of parts.partsPoint | keyvalue">
           <ul>{{ points.value }}</ul>
       </li>
