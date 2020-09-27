@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵConsole } from '@angular/core';
 import { Router } from '@angular/router';
+import { SegmentChangeEventDetail } from '@ionic/core';
 import { HomeTechnology } from 'src/app/interfaces/home-technology.interface';
 import { DatabaseService } from '../../database/database.service';
 import { CoursesFormatterService } from './services/courses-formatter.service';
