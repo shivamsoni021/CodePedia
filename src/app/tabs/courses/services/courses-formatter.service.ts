@@ -28,7 +28,8 @@ export class CoursesFormatterService {
                 description: filteredItem.atDescription,
                 requirement: filteredItem.requirement,
                 benefits: filteredItem.benefits,
-                wlearn: filteredItem.wlearn
+                wlearn: filteredItem.wlearn,
+                parts: filteredItem.parts
             });
         });
         return formattedData;

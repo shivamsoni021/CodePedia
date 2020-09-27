@@ -33,6 +33,7 @@ export interface SliderItem {
     requirement?: string;
     benefits?: string;
     wlearn?: string;
+    parts?;
 }
 
 /** Slider configuration interface for slider component */
