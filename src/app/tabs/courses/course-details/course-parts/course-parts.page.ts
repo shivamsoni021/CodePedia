@@ -17,6 +17,9 @@ export class CoursePartsPage implements OnInit {
   courseDetails;
   courseParts: Parts[] = new Array();
   partId;
+  slideOpts = {
+    slidesPerView: 2,
+};
   constructor(private router: Router) { }
 
   ngOnInit() {

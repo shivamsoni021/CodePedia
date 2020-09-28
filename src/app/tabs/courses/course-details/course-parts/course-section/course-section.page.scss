@@ -1,0 +1,30 @@
+.progress-outer {
+        width: 96%;
+        margin: 0.67rem 2%;
+        padding: 3px;
+        text-align: center;
+        background-color: #f4f4f4;
+        border: 1px solid #dcdcdc;
+        color: #fff;
+        border-radius: 1.25rem;
+    }
+
+.progress-inner {
+        min-width: 15%;
+        white-space: nowrap;
+        overflow: hidden;
+        padding: 5px;
+        border-radius: 1.25rem;
+        background-color:#0007ff;
+    }
+
+
+
+ion-slides{
+    width:100%;
+
+    ion-card{
+        width:100%;
+    }
+}
+

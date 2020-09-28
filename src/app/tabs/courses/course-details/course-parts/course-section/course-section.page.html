@@ -1,12 +1,39 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Sections</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  <ion-card *ngFor="let heading of content" >
+<ion-content id="content">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+          
+        <div class="progress-outer">
+          <div class="progress-inner" [style.width]="progress + '%'">
+              {{progress}}%
+          </div>
+      </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  <ion-slides pager="false" [options]="slideOpts" #slider>
+            <ion-slide *ngFor="let heading of content">
+                <ion-card>
+                  
+                    <ion-card-header>
+                        <ion-card-title>{{ heading.heading }}</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                      <ion-img width="200" height="200" [src]="heading.imageUrl"></ion-img>
+                        <p>{{ heading.data }}</p>
+                        <ion-button *ngIf="!isEnd" (click)="swipeNext()">Next</ion-button>
+                        <ion-button *ngIf="isEnd" (click)="swipeNext()">Continue</ion-button>
+                      </ion-card-content>
+                    </ion-card>
+                  </ion-slide>
+                 
+        </ion-slides>
+        
+       
+ <!-- <ion-card *ngFor="let heading of content" >
     <h3>{{ heading.heading }}</h3>
       {{heading.data}}
-  </ion-card>
+  </ion-ca
+  rd>  -->
 </ion-content>
