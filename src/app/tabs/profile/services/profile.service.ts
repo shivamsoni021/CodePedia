@@ -12,4 +12,8 @@ export class ProfileService{
         console.log(userId);
         return this.http.get(`https://codeshala-6dd34.firebaseio.com/users/${userId}.json`);
     }
+
+    getEnrolledCourse(userId: string){
+        return this.http.get(`https://codeshala-6dd34.firebaseio.com/users/${userId}/courseStudying.json`);
+    }
 }

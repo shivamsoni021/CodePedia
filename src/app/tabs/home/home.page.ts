@@ -6,6 +6,8 @@ import { DatabaseService } from '../../database/database.service';
 import { HomeTechnology } from '../../interfaces/home-technology.interface';
 import { HomeFormatterService } from './services/home-formatter.service';
 import { SliderConfiguration } from 'src/app/components/slider/constants/slider.constant';
+import { ProfileService } from '../profile/services/profile.service';
+import { HomeDatabase } from './services/homedb.service';
 
 @Component({
     selector: 'app-home',
@@ -20,23 +22,53 @@ export class HomePage implements OnInit {
     userId: string;
     technologyTitle = 'Shivam';
     technologies: SliderConfiguration;
-    isStudying;
-
+    isStudying=false;
+    enrolledCourses: SliderConfiguration;
+    suggestedCourses:{atName:string,atDescription:string,imageUrl:string,parts}[]= new Array();
     constructor(
         private databaseService: DatabaseService,
         private authService: AuthService,
-        private homeFormatterService: HomeFormatterService
+        private homeFormatterService: HomeFormatterService,
+        private profileService: ProfileService,
+        private homeService : HomeDatabase
     ) { }
 
     ngOnInit() {
-        // this.databaseService.getDataObject().subscribe((resData:any) =>{
-        //   const code = resData.allTechnology.aT
-        //   console.log(resData.allTechnology);
-        // });
+       
         this.userId = this.authService.getUserId();
-        this.loadTechnologyData();
+        
+        this.loadEnrolledCourse();
+        this.loadSuggestedCourse();        
+      //  this.loadTechnologyData();
     }
 
+    loadEnrolledCourse(){
+        let temData = [];
+        this.profileService.getEnrolledCourse(this.userId).subscribe((resData:any)=>{
+            for(const course in resData){
+                this.homeService.loadEnrolledCourse(resData[course].courseId).subscribe((data:any)=>{
+                    //  this.enrolledCourses.push({name: data.atName , description: data.atDescription,
+                    //         imageSrc:data.imageUrl,parts:data.parts});
+                    temData.push(data);
+                    if(temData.length) {
+                        this.enrolledCourses = this.homeFormatterService.getFormattedTechnologyData(temData);
+                    }
+                });
+            }
+            console.log(this.enrolledCourses); 
+        });
+
+    }
+    loadSuggestedCourse(){
+        this.homeService.loadSuggestedCourse().subscribe((resData:any)=>{
+            for(const course in resData){
+                this.homeService.loadEnrolledCourse(resData[course].courseId).subscribe((data:any)=>{
+                    this.suggestedCourses.push({atName: data.atName , atDescription: data.atDescription,
+                           imageUrl:data.imageUrl,parts:data.parts});
+               });
+            }
+        });
+    }
     /**
      * This method is used for loading technology data and format it
      */

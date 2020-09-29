@@ -11,15 +11,15 @@
                 </h5>
             </ion-label>
         </ion-item>
-        <app-slider (itemClick)="navigateToCoursePage($event)" [sliderConfiguration]="technologies"></app-slider>
+        <app-slider (itemClick)="navigateToCoursePage($event)" [sliderConfiguration]="enrolledCourses"></app-slider>
         <!-- <ion-slides pager="false" [options]="slideOpts">
-            <ion-slide *ngFor="let technology of technologies">
+            <ion-slide *ngFor="let technology of enrolledCourses">
                 <ion-card>
 
                     <ion-img width="200" height="200" [src]="technology.imageUrl"></ion-img>
                     <ion-card-header>
-                        <ion-card-subtitle>{{ technology.description }}</ion-card-subtitle>
-                        <ion-card-title>Madison, WI</ion-card-title>
+                        <ion-card-subtitle>{{ technology.atDescription }}</ion-card-subtitle>
+                        <ion-card-title>{{ technology.atName }}</ion-card-title>
                     </ion-card-header>
                     <ion-card-content>
 

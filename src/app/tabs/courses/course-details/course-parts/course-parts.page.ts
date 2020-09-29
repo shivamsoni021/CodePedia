@@ -24,28 +24,23 @@ export class CoursePartsPage implements OnInit {
 
   ngOnInit() {
     this.courseDetails = window.history.state.courseDetails;
-    console.log(this.courseDetails);
     this.getAllParts();
   }
 
   getAllParts(){
- 
     for(const parts in this.courseDetails){
       let partsPoint:string[]=new Array();
       for(const points in this.courseDetails[parts].partsPoints){
         partsPoint.push(this.courseDetails[parts].partsPoints[points]);
-      }
-      
+      }      
       this.courseParts.push({id :this.courseDetails[parts].id,partName :this.courseDetails[parts].partName ,
          partDescription: this.courseDetails[parts].partDescription , 
         partsPoint:partsPoint});
       console.log(this.courseParts);
     }
-
   }
   
   navigateToSectionPage(currentPart:Parts ,id: string){
-  
     this.router.navigate(["tabs/courses/course-details/course-parts/course-section"],{
       state:{
           currentPart,

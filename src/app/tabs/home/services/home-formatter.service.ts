@@ -29,7 +29,7 @@ export class HomeFormatterService {
                 id: filteredItem.id,
                 type: 'course',
                 imageSrc: filteredItem.imageUrl,
-                name: filteredItem.name,
+                name: filteredItem.name || filteredItem.atName,
                 description: filteredItem.atDescription,
                 requirement: filteredItem.requirement,
                 benefits: filteredItem.benefits,

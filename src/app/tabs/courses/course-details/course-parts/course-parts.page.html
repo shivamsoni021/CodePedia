@@ -1,12 +1,9 @@
 <ion-content>
-
   <ion-card *ngFor="let parts of courseParts" (click)="navigateToSectionPage(parts.partsPoint , parts.id)">
+    <h3>{{parts.partName}}</h3>
     <li *ngFor="let points of parts.partsPoint | keyvalue">
         <ul>{{ points.value }}</ul>
     </li>
 </ion-card>
 
 </ion-content>
-
-
-
