@@ -13,9 +13,11 @@ export class CourseSectionPage implements OnInit {
 
   sections;
   id;
+  courseType:string;
   progress=0;
   perSection;
   isEnd;
+  courseId;
   content : {heading:string , imageUrl:string, data:string}[]= new Array();
   @ViewChild('slider') slides: IonSlides;
   @ViewChild(IonContent) scrollContent : IonContent;
@@ -24,12 +26,13 @@ export class CourseSectionPage implements OnInit {
   ngOnInit() {
     this.sections = window.history.state.currentPart;
     this.id = window.history.state.id;
-    
+    this.courseType = window.history.state.courseType;
+    this.courseId = window.history.state.courseId;
     this.getContent();
     }
 
     getContent(){
-        this.contentService.getContent(this.id).subscribe((resData :any)=>{
+        this.contentService.getContent(this.id,this.courseType,this.courseId).subscribe((resData :any)=>{
             for(const heading in resData){
               
               this.content.push({heading:heading, imageUrl:resData[heading].imageUrl 

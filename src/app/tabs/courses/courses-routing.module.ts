@@ -20,7 +20,11 @@ const routes: Routes = [
     path: 'course-details/course-parts/course-section',
     loadChildren:() => import('./course-details/course-parts/course-section/course-section.module')
     .then(m=>m.CourseSectionPageModule)
+  },  {
+    path: 'course-list',
+    loadChildren: () => import('./course-list/course-list.module').then( m => m.CourseListPageModule)
   }
+
 
 ];
 

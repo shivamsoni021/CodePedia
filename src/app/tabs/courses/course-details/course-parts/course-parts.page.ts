@@ -17,6 +17,8 @@ export class CoursePartsPage implements OnInit {
   courseDetails;
   courseParts: Parts[] = new Array();
   partId;
+  courseId;
+  courseType:string;
   slideOpts = {
     slidesPerView: 2,
 };
@@ -24,6 +26,8 @@ export class CoursePartsPage implements OnInit {
 
   ngOnInit() {
     this.courseDetails = window.history.state.courseDetails;
+    this.courseType = window.history.state.courseType;
+    this.courseId = window.history.state.id;
     this.getAllParts();
   }
 
@@ -41,10 +45,14 @@ export class CoursePartsPage implements OnInit {
   }
   
   navigateToSectionPage(currentPart:Parts ,id: string){
+    let courseType = this.courseType;
+    let courseId = this.courseId;
     this.router.navigate(["tabs/courses/course-details/course-parts/course-section"],{
       state:{
           currentPart,
-          id
+          courseType,
+          id,
+          courseId
         }
     });
   }

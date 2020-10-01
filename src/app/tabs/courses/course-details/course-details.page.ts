@@ -15,6 +15,7 @@ interface CourseData {
 export class CourseDetailsPage implements OnInit {
 
     courseDetails: HomeTechnology;
+    courseType:string;
     requirements: string[] = new Array();
     benefits: string[] = new Array();
     wlearn: string[] = new Array();
@@ -34,6 +35,8 @@ export class CourseDetailsPage implements OnInit {
     ngOnInit() {
 
         this.courseDetails = window.history.state.courseDetails;
+        this.courseType = window.history.state.courseType;
+        console.log(this.courseType);
         this.userId = this.authService.getUserId();
         this.id = this.courseDetails.id;
         this.databaseService.isStudying(this.userId).subscribe((resData: any) => {
@@ -81,9 +84,13 @@ export class CourseDetailsPage implements OnInit {
 
     navigateToCoursePage(courseDetails: any): void {
         this.loadingService.hideLoader();
+        let courseType = this.courseType;
+        let id = this.id;
         this.router.navigate(['tabs/courses/course-details/course-parts'], {
             state: {
-                courseDetails
+                courseDetails,
+                courseType,
+                id
             }
         });
     }
