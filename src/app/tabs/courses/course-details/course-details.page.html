@@ -14,16 +14,16 @@
         <h5>Description</h5>
     </div>
     <ion-item lines="none" *ngIf="courseDetails.atDescription">
-        <ion-icon slot="start" name="star"></ion-icon>
-        <ion-label>{{courseDetails.atDescription}}</ion-label>
+        <ion-icon slot="start" name="chevron-forward-circle-sharp" size="small" color="danger"></ion-icon>
+        <ion-label class="points-font">{{courseDetails.atDescription}}</ion-label>
     </ion-item>
     <div class="all-post">
         <h5>What you'll Learn</h5>
     </div>
     <div *ngFor="let currentwlearn of wlearn">
         <ion-item lines="none">
-            <ion-icon slot="start" name="star"></ion-icon>
-            <ion-label>{{ currentwlearn }}</ion-label>
+            <ion-icon slot="start" name="chevron-forward-circle-sharp" size="small" color="danger"></ion-icon>
+            <ion-label class="points-font">{{ currentwlearn }}</ion-label>
         </ion-item>
     </div>
     <div class="all-post">
@@ -31,8 +31,8 @@
     </div>
     <div *ngFor="let curRequirement of requirements">
         <ion-item lines="none">
-            <ion-icon slot="start" name="star"></ion-icon>
-            <ion-label>{{ curRequirement }}</ion-label>
+            <ion-icon slot="start" name="chevron-forward-circle-sharp" size="small" color="danger"></ion-icon>
+            <ion-label class="points-font">{{ curRequirement }}</ion-label>
         </ion-item>
     </div>
     <div class="all-post">
@@ -40,9 +40,10 @@
     </div>
     <div *ngFor="let benefits of benefits">
         <ion-item lines="none">
-            <ion-icon slot="start" name="star"></ion-icon>
-            <ion-label>{{ benefits }}</ion-label>
+            <ion-icon slot="start" name="chevron-forward-circle-sharp" size="small" color="danger"></ion-icon>
+            <ion-label class="points-font">{{ benefits }}</ion-label>
         </ion-item>
     </div>
-    <ion-button (click)="enrollCourse()" expand="block">Enroll Now</ion-button>
+    <ion-button (click)="enrollCourse()" expand="block" color="tertiary" shape="round" class="rounded">
+        <ion-icon name="create-outline" slot="start"></ion-icon>Enroll Now</ion-button>
 </ion-content>

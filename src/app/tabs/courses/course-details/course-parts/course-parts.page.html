@@ -1,9 +1,16 @@
 <ion-content>
-  <ion-card *ngFor="let parts of courseParts" (click)="navigateToSectionPage(parts.partsPoint , parts.id)">
-    <h3>{{parts.partName}}</h3>
-    <li *ngFor="let points of parts.partsPoint | keyvalue">
-        <ul>{{ points.value }}</ul>
-    </li>
+  <ion-card *ngFor="let parts of courseParts; let i = index" (click)="navigateToSectionPage(parts.partsPoint , parts.id)" class="card">
+    <div [ngClass]="{ 'part-bg' : i % 2 == 0, 'part-bg2' : i % 2 != 0 }">
+      <h4>{{parts.partName}}</h4>
+    </div>
+    <ion-list *ngFor="let points of parts.partsPoint | keyvalue" class="ion-no-padding">
+        <ion-item lines="none" class="ion-no-padding">
+          <ion-icon name="code-slash" color="dark" size="small" class="ion-margin-horizontal"></ion-icon>
+          <ion-label class="points-font">
+            {{ points.value }}
+          </ion-label>
+        </ion-item>
+    </ion-list>
 </ion-card>
 
 </ion-content>
