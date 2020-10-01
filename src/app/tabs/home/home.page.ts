@@ -24,7 +24,7 @@ export class HomePage implements OnInit {
     technologies: SliderConfiguration;
     isStudying=false;
     enrolledCourses: SliderConfiguration;
-    suggestedCourses:{atName:string,atDescription:string,imageUrl:string,parts}[]= new Array();
+    suggestedCourses: SliderConfiguration;
     constructor(
         private databaseService: DatabaseService,
         private authService: AuthService,
@@ -55,16 +55,21 @@ export class HomePage implements OnInit {
                     }
                 });
             }
-            console.log(this.enrolledCourses); 
+             
         });
 
     }
     loadSuggestedCourse(){
+        let temData = [];
         this.homeService.loadSuggestedCourse().subscribe((resData:any)=>{
             for(const course in resData){
                 this.homeService.loadEnrolledCourse(resData[course].courseId).subscribe((data:any)=>{
-                    this.suggestedCourses.push({atName: data.atName , atDescription: data.atDescription,
-                           imageUrl:data.imageUrl,parts:data.parts});
+                    // this.suggestedCourses.push({atName: data.atName , atDescription: data.atDescription,
+                    //        imageUrl:data.imageUrl,parts:data.parts});
+                    temData.push(data);
+                    if(temData.length){
+                        this.suggestedCourses = this.homeFormatterService.getFormattedTechnologyData(temData);
+                    }
                });
             }
         });

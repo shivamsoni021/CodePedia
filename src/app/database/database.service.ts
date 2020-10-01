@@ -65,4 +65,22 @@ export class DatabaseService {
         return this.http.get(`https://codeshala-6dd34.firebaseio.com/users/${userID}/courseStudying.json`);
     }
 
+    getTrendingTechnology(){
+        return this.http.get(`https://codeshala-6dd34.firebaseio.com/courses/trending.json`);
+    }
+
+    getWebTechnology(){
+        return this.http.get(`https://codeshala-6dd34.firebaseio.com/courses/webtech.json`);
+    }
+
+    getScripting(){
+        return this.http.get(`https://codeshala-6dd34.firebaseio.com/courses/trending.json`);
+    }
+
+    getCourses(courseType:string){
+        return this.http.get(`https://codeshala-6dd34.firebaseio.com/courses/${courseType}.json`);
+    }
 }
+
+
+

@@ -8,7 +8,21 @@ export class HomeDatabase{
     constructor(private http : HttpClient){}
 
     loadEnrolledCourse(courseId:string){
-        return this.http.get(`https://codeshala-6dd34.firebaseio.com/courses/allTechnology/${courseId}.json`);
+        let courseType="";
+
+        if(courseId.match("a")){
+            courseType = "allTechnology";
+        }
+        else if(courseId.match("tt")){
+            courseType = "trending";
+        }
+        else if(courseId.match("st")){
+            courseType= "scripting";
+        }
+        else if(courseId.match("wt")){
+            courseType="webTech";
+        }
+        return this.http.get(`https://codeshala-6dd34.firebaseio.com/courses/${courseType}/${courseId}.json`);
     }
 
     loadSuggestedCourse(){

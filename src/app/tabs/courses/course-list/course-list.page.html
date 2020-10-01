@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>course-list</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let course of courses" size="6">
+        <ion-card (click)="navigateToCoursePage(course)">
+          <ion-img width="200" height="200" [src]="course.imageSrc"></ion-img>
+          <ion-card-header>
+            <ion-card-title>{{ course.name }}</ion-card-title>
+            <ion-card-subtitle>{{ course.description }}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>
