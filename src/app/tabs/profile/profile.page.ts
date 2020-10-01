@@ -55,7 +55,8 @@ export class ProfilePage implements OnInit {
       this.coursesCompleted.push({name : profileData.coursesCompleted[course].name,
         imageUrl: profileData.coursesCompleted[course].imageUrl,
         desc: profileData.coursesCompleted[course].desc});
-  }
+    }
+
     for(const badge in profileData.badges){
         this.badges.push({badge: profileData.badges[badge].badge 
           , badgeDesc: profileData.badges[badge].badgeDesc 

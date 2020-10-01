@@ -8,7 +8,6 @@ import { SliderConfiguration } from 'src/app/components/slider/constants/slider.
 import { ProfileService } from '../profile/services/profile.service';
 import { HomeDatabase } from '../home/services/homedb.service';
 import { AuthService } from 'src/auth/auth.service';
-import { HomeFormatterService } from '../home/services/home-formatter.service';
 
 @Component({
     selector: 'app-courses',
@@ -17,21 +16,20 @@ import { HomeFormatterService } from '../home/services/home-formatter.service';
 })
 export class CoursesPage implements OnInit {
 
-    allTechnology: HomeTechnology[] = new Array();
-    coursesData: any;
-    obsData: any;
+    userId:string;
     courseType:string;
-    selectData: string;
-    allTechnologySliderConfig: SliderConfiguration;
-    trendingTechnology:HomeTechnology[] =new Array();
-    trendingTechSliderConfig: SliderConfiguration;
-    scripting:HomeTechnology[]=new Array();
-    scriptingSliderConfig:SliderConfiguration;
-    webtechnology:HomeTechnology[]=new Array();
-    webSliderConfig:SliderConfiguration;
-    userId;
-    enrolledCourses=new Array();
+    courseProgress:string;
     isStudying=false;
+    enrolledCourses=new Array();
+    allTechnology: HomeTechnology[] = new Array();
+    trendingTechnology:HomeTechnology[] =new Array();
+    scripting:HomeTechnology[]=new Array();
+    webtechnology:HomeTechnology[]=new Array();
+    allTechnologySliderConfig: SliderConfiguration;
+    trendingTechSliderConfig: SliderConfiguration;
+    webSliderConfig:SliderConfiguration;
+    scriptingSliderConfig:SliderConfiguration;
+    
     constructor(
         private databaseService: DatabaseService,
         private router: Router,
@@ -39,12 +37,9 @@ export class CoursesPage implements OnInit {
         private profileService: ProfileService,
         private homeService: HomeDatabase,
         private authService: AuthService,
-        private homeFormatterService: HomeFormatterService
     ) { }
 
-    ngOnInit() {
-        
-    }
+    ngOnInit() {}
 
     ionViewWillEnter() {
         this.getAllCourses();
@@ -54,8 +49,7 @@ export class CoursesPage implements OnInit {
     }
 
     getAllCourses() {
-        this.databaseService.getAllCourses().subscribe((allCourses: HomeTechnology) => {
-            // tslint:disable-next-line: forin
+        this.databaseService.getCourses('allTechnology').subscribe((allCourses: HomeTechnology) => {
             for (const courses in allCourses) {
                 this.allTechnology.push(allCourses[courses]);
             }
@@ -64,7 +58,7 @@ export class CoursesPage implements OnInit {
     }
 
     getTrendingCourses(){
-        this.databaseService.getTrendingTechnology().subscribe((trendingTechno:HomeTechnology)=>{
+        this.databaseService.getCourses('trending').subscribe((trendingTechno:HomeTechnology)=>{
             for(const courses in trendingTechno){
                 this.trendingTechnology.push(trendingTechno[courses]);
             }
@@ -73,7 +67,7 @@ export class CoursesPage implements OnInit {
     }
 
     getWebTech(){
-        this.databaseService.getTrendingTechnology().subscribe((webTechno:HomeTechnology)=>{
+        this.databaseService.getCourses('web').subscribe((webTechno:HomeTechnology)=>{
             for(const courses in webTechno){
                 this.webtechnology.push(webTechno[courses]);
             }
@@ -82,16 +76,12 @@ export class CoursesPage implements OnInit {
     }
 
     getScriptTech(){
-        this.databaseService.getTrendingTechnology().subscribe((scriptTech:HomeTechnology)=>{
+        this.databaseService.getCourses('scripting').subscribe((scriptTech:HomeTechnology)=>{
             for(const courses in scriptTech){
                 this.scripting.push(scriptTech[courses]);
             }
             this.scriptingSliderConfig = this.coursesFormatterService.getFormattedCoursesData(this.scripting);
         });
-    }
-
-    public test(event, item) {
-        this.selectData = item;
     }
 
     navigateToCoursePage(courseDetails: HomeTechnology,courseType:string): void {
@@ -103,7 +93,6 @@ export class CoursesPage implements OnInit {
         });
     }
     segmentChanged(event: CustomEvent<SegmentChangeEventDetail>) {
-        console.log(event.detail);
         this.isStudying = !this.isStudying;        
      }
 
@@ -114,13 +103,15 @@ export class CoursesPage implements OnInit {
     loadEnrolledCourse(){
         let temData = [];
         this.profileService.getEnrolledCourse(this.userId).subscribe((resData:any)=>{
+            console.log(resData);
             for(const course in resData){
-                this.homeService.loadEnrolledCourse(resData[course].courseId).subscribe((data:any)=>{
-                    
+                let progress = resData[course].progress;
+                this.homeService.loadEnrolledCourse(resData[course].courseId).subscribe((data:any)=>{       
                     temData.push(data);
+                    console.log(data);
                     if(temData.length) {
                         this.enrolledCourses.push({name: data.atName , description: data.atDescription,
-                            imageSrc:data.imageUrl,parts:data.parts});
+                            imageSrc:data.imageUrl,parts:data.parts,progress:progress});
                     }
                 });
             }
@@ -136,5 +127,4 @@ export class CoursesPage implements OnInit {
             }
         });
     }
-
 }

@@ -1,11 +1,12 @@
 <ion-content id="content">
+<div *ngIf="!isCompleted">
   <ion-grid>
     <ion-row>
       <ion-col>
           
         <div class="progress-outer">
           <div class="progress-inner" [style.width]="progress + '%'">
-              {{progress}}%
+              
           </div>
       </div>
       </ion-col>
@@ -23,14 +24,20 @@
                       <ion-img width="200" height="200" [src]="heading.imageUrl"></ion-img>
                         <p>{{ heading.data }}</p>
                         <ion-button *ngIf="!isEnd" (click)="swipeNext()">Next</ion-button>
-                        <ion-button *ngIf="isEnd" (click)="swipeNext()">Continue</ion-button>
+                        <ion-button *ngIf="isEnd" (click)="onComplete()">Continue</ion-button>
                       </ion-card-content>
                     </ion-card>
                   </ion-slide>
                  
         </ion-slides>
         
-       
+</div>
+<div *ngIf="isCompleted">
+  <h1>Congrats</h1>
+  <ion-button (click)="navigateBack()">
+
+  </ion-button>
+</div>
  <!-- <ion-card *ngFor="let heading of content" >
     <h3>{{ heading.heading }}</h3>
       {{heading.data}}

@@ -44,6 +44,7 @@ export class CourseDetailsPage implements OnInit {
             for (const course in resData) {
                 this.courseStudying.push(resData[course]);
             }
+            console.log(this.courseStudying);
             this.courseStudying.forEach((value: any) => {
                 this.isStudying(value);
             });

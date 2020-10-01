@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonContent, IonSlides } from '@ionic/angular';
 import { ContentService } from 'src/app/database/content.service';
@@ -11,6 +12,7 @@ import { ContentService } from 'src/app/database/content.service';
 
 export class CourseSectionPage implements OnInit {
 
+  isCompleted=false;
   sections;
   id;
   courseType:string;
@@ -21,7 +23,8 @@ export class CourseSectionPage implements OnInit {
   content : {heading:string , imageUrl:string, data:string}[]= new Array();
   @ViewChild('slider') slides: IonSlides;
   @ViewChild(IonContent) scrollContent : IonContent;
-  constructor(private contentService : ContentService) { }
+  constructor(private contentService : ContentService,
+          private _location: Location) { }
 
   ngOnInit() {
     this.sections = window.history.state.currentPart;
@@ -39,11 +42,8 @@ export class CourseSectionPage implements OnInit {
                 ,data:resData[heading].data});
             }
           })
-    
-      
     }
 
-    
     swipeNext(){
       this.perSection = 100/this.content.length;
       console.log(this.perSection);
@@ -62,7 +62,10 @@ export class CourseSectionPage implements OnInit {
       }
       this.perSection = 0;
     }
-    navigateToCourse(){
-
+    onComplete(){
+      this.isCompleted = true;
+    }
+    navigateBack(){
+      this._location.back();
     }
 }
