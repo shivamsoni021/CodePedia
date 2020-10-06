@@ -29,7 +29,8 @@ export class CoursesFormatterService {
                 requirement: filteredItem.requirement,
                 benefits: filteredItem.benefits,
                 wlearn: filteredItem.wlearn,
-                parts: filteredItem.parts
+                parts: filteredItem.parts,
+                courseType: filteredItem.courseType
             });
         });
         return formattedData;

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SliderConfiguration, SliderType, SliderOrientation } from 'src/app/components/slider/constants/slider.constant';
+import { CoursePartsPage } from '../../courses/course-details/course-parts/course-parts.page';
 
 @Injectable({
     providedIn: 'root'
@@ -33,7 +34,9 @@ export class HomeFormatterService {
                 description: filteredItem.atDescription,
                 requirement: filteredItem.requirement,
                 benefits: filteredItem.benefits,
-                wlearn: filteredItem.wlearn
+                wlearn: filteredItem.wlearn,
+                parts: filteredItem.parts, 
+                courseType:filteredItem.courseType
             });
         });
         return formattedData;

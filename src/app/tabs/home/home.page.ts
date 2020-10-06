@@ -5,6 +5,7 @@ import { HomeFormatterService } from './services/home-formatter.service';
 import { SliderConfiguration } from 'src/app/components/slider/constants/slider.constant';
 import { ProfileService } from '../profile/services/profile.service';
 import { HomeDatabase } from './services/homedb.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-home',
@@ -26,7 +27,8 @@ export class HomePage implements OnInit {
         private authService: AuthService,
         private homeFormatterService: HomeFormatterService,
         private profileService: ProfileService,
-        private homeService : HomeDatabase
+        private homeService : HomeDatabase,
+        private router : Router
     ) { }
 
     ngOnInit() {  
@@ -55,8 +57,10 @@ export class HomePage implements OnInit {
             for(const course in resData){
                 this.homeService.loadEnrolledCourse(resData[course].courseId).subscribe((data:any)=>{
                     temData.push(data);
+                    console.log(temData);
                     if(temData.length){
                         this.suggestedCourses = this.homeFormatterService.getFormattedTechnologyData(temData);
+                        console.log(this.suggestedCourses);
                     }
                });
             }
@@ -64,7 +68,13 @@ export class HomePage implements OnInit {
     }
   
     navigateToCoursePage(courseDetails) {
-        console.log(courseDetails);
+        let courseType = courseDetails.courseType;
+        this.router.navigate(['tabs/courses/course-details'], {
+            state: {
+                courseDetails,
+                courseType
+            }
+        });        
     }
 
 }

@@ -9,6 +9,7 @@ export class HomeTechnology {
     parts?: string[];
     description?: string;
     imageSrc?: string;
+    courseType?:string;
 
     constructor(
         id: string,
@@ -17,7 +18,8 @@ export class HomeTechnology {
         imageUrl: string,
         wlearn: string,
         requirement: string,
-        benefits: string
+        benefits: string,
+        courseType: string
     ) {
         id = this.id;
         name = this.name;
@@ -26,5 +28,7 @@ export class HomeTechnology {
         benefits = this.benefits;
         requirement = this.requirement;
         wlearn = this.wlearn;
+        courseType =this.courseType;
+         
     }
 }

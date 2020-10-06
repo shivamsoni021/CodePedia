@@ -20,7 +20,7 @@
         </h5> 
         </ion-label>
     </ion-item>
-    <app-slider (itemClick)="navigateToCoursePage($event,'allTechnology')" [sliderConfiguration]="allTechnologySliderConfig"></app-slider>
+    <app-slider (itemClick)="navigateToCoursePage($event)" [sliderConfiguration]="allTechnologySliderConfig"></app-slider>
     <!-- <ion-slides pager="false" [options]="slideOpts">
       <ion-slide *ngFor="let technology of allTechnology">
         <ion-card (click)="navigateToCoursePage(technology)">
@@ -43,7 +43,7 @@
       <ion-label class="all-post"> <h5>Trending Technologies</h5></ion-label>
     </ion-item>
     
-    <app-slider (itemClick)="navigateToCoursePage($event,'trending')" [sliderConfiguration]="trendingTechSliderConfig"></app-slider>
+    <app-slider (itemClick)="navigateToCoursePage($event)" [sliderConfiguration]="trendingTechSliderConfig"></app-slider>
     <!-- <ion-slides pager="false" [options]="slideOpts">
       <ion-slide *ngFor="let technology of allTechnology">
         <ion-card>
@@ -67,7 +67,7 @@
       <ion-label class="all-post"> <h5>Web Technologies</h5></ion-label>
     </ion-item>
     
-    <app-slider (itemClick)="navigateToCoursePage($event,'webtech')" [sliderConfiguration]="webSliderConfig"></app-slider>
+    <app-slider (itemClick)="navigateToCoursePage($event)" [sliderConfiguration]="webSliderConfig"></app-slider>
     <!-- <ion-slides pager="false" [options]="slideOpts">
       <ion-slide *ngFor="let technology of allTechnology">
         <ion-card>
@@ -91,7 +91,7 @@
       <ion-label class="all-post"> <h5>Scripting Languages</h5></ion-label>
     </ion-item>
     
-    <app-slider (itemClick)="navigateToCoursePage($event,'scripting')" [sliderConfiguration]="scriptingSliderConfig"></app-slider>
+    <app-slider (itemClick)="navigateToCoursePage($event)" [sliderConfiguration]="scriptingSliderConfig"></app-slider>
     <!-- <ion-slides pager="false" [options]="slideOpts">
       <ion-slide *ngFor="let technology of allTechnology">
         <ion-card>

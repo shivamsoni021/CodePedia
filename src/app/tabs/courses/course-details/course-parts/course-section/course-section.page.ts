@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { IonContent, IonSlides } from '@ionic/angular';
 import { ContentService } from 'src/app/database/content.service';
 
@@ -20,17 +21,20 @@ export class CourseSectionPage implements OnInit {
   perSection;
   isEnd;
   courseId;
+  partNumber:number;
   content : {heading:string , imageUrl:string, data:string}[]= new Array();
   @ViewChild('slider') slides: IonSlides;
   @ViewChild(IonContent) scrollContent : IonContent;
   constructor(private contentService : ContentService,
-          private _location: Location) { }
+          private _location: Location,private router : Router) { }
 
   ngOnInit() {
     this.sections = window.history.state.currentPart;
     this.id = window.history.state.id;
     this.courseType = window.history.state.courseType;
     this.courseId = window.history.state.courseId;
+    this.partNumber = window.history.state.partNumber;
+    console.log(this.partNumber);
     this.getContent();
     }
 
@@ -57,15 +61,23 @@ export class CourseSectionPage implements OnInit {
       if(this.progress===99){
         this.progress = 100;
       }
+      
       else if(this.progress>100){
         this.progress = 100;
       }
       this.perSection = 0;
     }
     onComplete(){
+      this.partNumber++;
       this.isCompleted = true;
     }
+
     navigateBack(){
-      this._location.back();
+      let partNumber:number = this.partNumber;
+        this.router.navigate(['tabs/courses/course-details/course-parts'],{
+          state:{
+            partNumber
+        }
+      });
     }
 }

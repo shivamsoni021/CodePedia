@@ -50,3 +50,10 @@
 .points-font{
     font-family: Nunito-Regular;
 }
+
+ion-item{
+    --min-height:0px;
+    ion-label{
+        margin:0.5rem;
+    }
+}

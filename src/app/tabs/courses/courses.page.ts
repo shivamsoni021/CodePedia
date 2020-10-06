@@ -54,6 +54,7 @@ export class CoursesPage implements OnInit {
                 this.allTechnology.push(allCourses[courses]);
             }
             this.allTechnologySliderConfig = this.coursesFormatterService.getFormattedCoursesData(this.allTechnology);
+            console.log(this.allTechnologySliderConfig);
         });
     }
 
@@ -84,7 +85,8 @@ export class CoursesPage implements OnInit {
         });
     }
 
-    navigateToCoursePage(courseDetails: HomeTechnology,courseType:string): void {
+    navigateToCoursePage(courseDetails: HomeTechnology): void {
+        let courseType = courseDetails.courseType;
         this.router.navigate(['tabs/courses/course-details'], {
             state: {
                 courseDetails,
@@ -108,10 +110,8 @@ export class CoursesPage implements OnInit {
                 let progress = resData[course].progress;
                 this.homeService.loadEnrolledCourse(resData[course].courseId).subscribe((data:any)=>{       
                     temData.push(data);
-                    console.log(data);
                     if(temData.length) {
-                        this.enrolledCourses.push({name: data.atName , description: data.atDescription,
-                            imageSrc:data.imageUrl,parts:data.parts,progress:progress});
+                        this.enrolledCourses.push(temData);
                     }
                 });
             }
