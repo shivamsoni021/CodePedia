@@ -15,10 +15,14 @@ export class CourseListPage implements OnInit {
   constructor(private databaseService: DatabaseService,
       private router:Router) { }
   ngOnInit() {
+    
+  }
+  
+  ionViewWillEnter(){
     this.courseType = window.history.state.courseType;
+    this.courses = [];
     this.getContent();
   }
-
   getContent(){
     
     this.databaseService.getCourses(this.courseType).subscribe((courses: any) => {

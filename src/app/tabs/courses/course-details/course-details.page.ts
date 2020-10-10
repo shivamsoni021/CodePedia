@@ -69,6 +69,7 @@ export class CourseDetailsPage implements OnInit {
         this.databaseService.enrollCourse(this.userId, this.id).subscribe((resData: any) => {
             console.log(resData);
         });
+        this.navigateToCoursePage(this.courseDetails.parts); 
     }
 
     isStudying(value: any): boolean {

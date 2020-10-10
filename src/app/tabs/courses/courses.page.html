@@ -112,12 +112,12 @@
 <div *ngIf="isStudying">
   <ion-grid>
     <ion-row>
-      <ion-col *ngFor="let course of enrolledCourses" size="6">
-          <ion-card>
-            <img [src]="course.imageSrc"/>
+      <ion-col *ngFor="let course of enrolledCourses"  size="6">
+          <ion-card >
+            <img [src]="course.image"/>
             <ion-card-header>
               <ion-card-title>
-                {{course.name}}
+                {{ course.name }}
               </ion-card-title>
             </ion-card-header>
             <ion-card-content>

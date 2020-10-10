@@ -32,11 +32,19 @@
         </ion-slides>
         
 </div>
-<div *ngIf="isCompleted">
-  <h1>Congrats</h1>
+<div class="content" *ngIf="isCompleted">
+  <div class="center-text">
+  <h3>
+    You have Completed this section.
+  </h3>
+  </div>
+  <br>
+  <div class="next-button">
+    
   <ion-button (click)="navigateBack()">
-
+    Continue
   </ion-button>
+</div>
 </div>
  <!-- <ion-card *ngFor="let heading of content" >
     <h3>{{ heading.heading }}</h3>

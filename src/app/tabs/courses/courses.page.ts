@@ -20,7 +20,7 @@ export class CoursesPage implements OnInit {
     courseType:string;
     courseProgress:string;
     isStudying=false;
-    enrolledCourses=new Array();
+    enrolledCourses:{name:string , description:string , image:string}[]=new Array();
     allTechnology: HomeTechnology[] = new Array();
     trendingTechnology:HomeTechnology[] =new Array();
     scripting:HomeTechnology[]=new Array();
@@ -42,6 +42,10 @@ export class CoursesPage implements OnInit {
     ngOnInit() {}
 
     ionViewWillEnter() {
+        this.trendingTechnology = [];
+        this.enrolledCourses = [];
+        this.webtechnology = [];
+        this.scripting = [];
         this.getAllCourses();
         this.getTrendingCourses();
         this.userId = this.authService.getUserId();
@@ -108,11 +112,15 @@ export class CoursesPage implements OnInit {
             console.log(resData);
             for(const course in resData){
                 let progress = resData[course].progress;
+                console.log(resData[course].courseId);
                 this.homeService.loadEnrolledCourse(resData[course].courseId).subscribe((data:any)=>{       
                     temData.push(data);
+                    console.log(data);
                     if(temData.length) {
-                        this.enrolledCourses.push(temData);
+                        this.enrolledCourses.push({name: data.atName , description:data.atDescription,
+                                       image: data.imageUrl });
                     }
+                    console.log(this.enrolledCourses);
                 });
             }
              
