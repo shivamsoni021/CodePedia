@@ -29,7 +29,7 @@ export class CoursesPage implements OnInit {
     trendingTechSliderConfig: SliderConfiguration;
     webSliderConfig:SliderConfiguration;
     scriptingSliderConfig:SliderConfiguration;
-    
+    coursePreference = "all-courses";
     constructor(
         private databaseService: DatabaseService,
         private router: Router,
@@ -50,6 +50,10 @@ export class CoursesPage implements OnInit {
         this.getTrendingCourses();
         this.userId = this.authService.getUserId();
         this.loadEnrolledCourse();
+        let preference = window.history.state.coursePreference;
+        if(preference != undefined){
+            this.coursePreference = preference;
+        }
     }
 
     getAllCourses() {
@@ -99,6 +103,7 @@ export class CoursesPage implements OnInit {
         });
     }
     segmentChanged(event: CustomEvent<SegmentChangeEventDetail>) {
+        console.log(event.detail.value);
         this.isStudying = !this.isStudying;        
      }
 

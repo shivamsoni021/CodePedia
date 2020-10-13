@@ -23,6 +23,7 @@ export class HomePage implements OnInit {
     isStudying=false;
     enrolledCourses: SliderConfiguration;
     suggestedCourses: SliderConfiguration;
+    coursePreference:string = "";
     constructor(
         private authService: AuthService,
         private homeFormatterService: HomeFormatterService,
@@ -74,7 +75,22 @@ export class HomePage implements OnInit {
                 courseDetails,
                 courseType
             }
-        });        
+        });    
+    }
+
+    navigation(preference){
+        if(preference == "all-courses"){
+            this.coursePreference = "all-courses";
+        }
+        else{
+            this.coursePreference = "studying";
+        }
+        let coursePreference = preference;
+        this.router.navigate(['tabs/courses'], {
+            state: {
+                coursePreference
+            }
+        });
     }
 
 }

@@ -4,7 +4,7 @@
 
     <div *ngIf="!isStudying" class="studying">
         <ion-item lines="none" class="technology-title">
-            <ion-icon (click)="navigateToCourseList('studying')" slot="end" name="arrow-forward-outline"></ion-icon>
+            <ion-icon (click)="navigation('studying')" slot="end" name="arrow-forward-outline"></ion-icon>
             <ion-label class="all-post">
                 <h5>
                     Studying
@@ -31,7 +31,7 @@
 
     <div class="technologies">
         <ion-item lines="none" class="technology-title">
-            <ion-icon (click)="navigateToCourseList('home')" slot="end" name="arrow-forward-outline"></ion-icon>
+            <ion-icon (click)="navigation('all-courses')" slot="end" name="arrow-forward-outline"></ion-icon>
             <ion-label *ngIf="!isStudying" class="all-post">
                 <h5>
                     Start Learning

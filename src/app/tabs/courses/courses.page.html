@@ -6,7 +6,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-segment class="segment" mode="ios" value="all-courses" (ionChange)="segmentChanged($event)" #segment>
+  <ion-segment class="segment" mode="ios" value="all-courses" (ionChange)="segmentChanged($event)" [(ngModel)]="coursePreference" #segment>
     <ion-segment-button value="all-courses">All Courses</ion-segment-button>
     <ion-segment-button value="studying">Studying</ion-segment-button>
   </ion-segment>
