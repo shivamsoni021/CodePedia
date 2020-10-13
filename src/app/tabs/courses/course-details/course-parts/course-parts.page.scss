@@ -1,3 +1,7 @@
+ion-toolbar{
+    --background: #cc33ff;
+}
+
 .card{
     border-radius: 10px;
     margin-left: 15px;
@@ -10,9 +14,7 @@
         width: auto;
         margin-top: 0px;
         padding : none;
-        background: #b377ec;
-        
-        background: linear-gradient(90deg,#b377ec 0%, #a648ff 100%);
+        background: linear-gradient(90deg,#0ddf0d 0%, #62f727 100%);
     
         h4{
             color: white;
@@ -28,9 +30,39 @@
         width: auto;
         margin-top: 0px;
         padding : none;
-        background: #e94444;
-        
         background: linear-gradient(90deg,#e94444 0%, #f77538 100%);
+    
+        h4{
+            color: white;
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+        
+    }
+
+    .part-bg3{
+        display: flex;
+        height: 40px;
+        width: auto;
+        margin-top: 0px;
+        padding : none;
+        background: linear-gradient(90deg,#42c0fa 0%, #c1eefc 100%);
+    
+        h4{
+            color: white;
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+        
+    }
+
+    .part-bg4{
+        display: flex;
+        height: 40px;
+        width: auto;
+        margin-top: 0px;
+        padding : none;
+        background: linear-gradient(90deg,#f728a1 0%, #ff95c1 100%);
     
         h4{
             color: white;

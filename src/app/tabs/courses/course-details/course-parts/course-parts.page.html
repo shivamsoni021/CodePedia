@@ -1,7 +1,13 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
   <div *ngIf="showContent">
   <ion-card *ngFor="let parts of courseParts; let i = index" (click)="navigateToSectionPage(parts.partsPoint , parts.id)" class="card">
-    <div [ngClass]="{ 'part-bg' : i % 2 == 0, 'part-bg2' : i % 2 != 0 }">
+    <div [ngClass]="{ 'part-bg' : i % 4 == 0, 'part-bg2' : i % 4 == 1, 'part-bg3' : i % 4 == 2, 'part-bg4' : i % 4 == 3 }">
       <h4>{{parts.partName}}</h4>
     </div>
     <ion-list *ngFor="let points of parts.partsPoint | keyvalue" class="ion-no-padding">
