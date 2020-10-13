@@ -21,6 +21,7 @@ export class CourseSectionPage implements OnInit {
   perSection;
   isEnd;
   courseId;
+  count=0;
   partNumber:number;
   content : {heading:string , imageUrl:string, data:string}[]= new Array();
   @ViewChild('slider') slides: IonSlides;
@@ -45,7 +46,7 @@ export class CourseSectionPage implements OnInit {
               this.content.push({heading:heading, imageUrl:resData[heading].imageUrl 
                 ,data:resData[heading].data});
             }
-          })
+          });
     }
 
     swipeNext(){

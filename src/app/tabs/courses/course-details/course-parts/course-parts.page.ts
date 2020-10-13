@@ -66,7 +66,10 @@ export class CoursePartsPage implements OnInit {
   passCurrentPart(){
       this.currentPart= this.courseParts[this.partNumber];
       console.log(this.currentPart);
-      this.navigateToSectionPage(this.currentPart,`part${this.partNumber + 1}`);
+      
+      if(this.currentPart != undefined){
+        this.navigateToSectionPage(this.currentPart,`part${this.partNumber + 1}`);
+      }
     }
 
   navigateToSectionPage(currentPart:Parts ,id: string){
