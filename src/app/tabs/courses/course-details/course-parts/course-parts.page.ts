@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DatabaseService } from 'src/app/database/database.service';
+import { AuthService } from 'src/auth/auth.service';
 
 interface Parts{
   id: string;
@@ -23,16 +25,30 @@ export class CoursePartsPage implements OnInit {
   currentPart;
   showContent=true;
   fromBack= false;
+  userId;
+  courseName;
+  courseDescription;
+  courseImage;
+  completedCourses;
   slideOpts = {
     slidesPerView: 2,
 };
-  constructor(private router: Router) { }
+  isCourseCompleted =false;
+  wasCourseCompleted =false;
+  constructor(private router: Router,
+              private databaseService : DatabaseService,
+              private authService : AuthService) { }
 
   ngOnInit() {
+    this.userId = this.authService.getUserId();
+    this.completedCourses = this.databaseService.returnCompletedCourse();
     this.courseDetails = window.history.state.courseDetails;
+    this.courseName=window.history.state.courseName;
+    this.courseDescription = window.history.state.description;
+    this.courseImage = window.history.state.image;
     this.courseType = window.history.state.courseType;
     this.courseId = window.history.state.id;
-    
+    this.wasCourseComplete();
     console.log(this.partNumber);
     this.getAllParts();
   }
@@ -44,7 +60,8 @@ export class CoursePartsPage implements OnInit {
     if(this.partNumber>0){
       this.passCurrentPart();
     }
-    else{
+    else{ 
+      console.log("Course Completed")
       this.showContent = true;
     }
   }
@@ -70,13 +87,19 @@ export class CoursePartsPage implements OnInit {
       if(this.currentPart != undefined){
         this.navigateToSectionPage(this.currentPart,`part${this.partNumber + 1}`);
       }
+      else{
+        this.isCourseCompleted = true;
+        if(!this.wasCourseCompleted){
+        this.databaseService.completeCourses(this.userId , this.courseId,this.courseName,
+                      this.courseImage).subscribe((resData:any)=>{});
+       }
+     }
     }
 
   navigateToSectionPage(currentPart:Parts ,id: string){
     let courseType = this.courseType;
     let courseId = this.courseId;
-    console.log(currentPart);
-    console.log(id);
+
     let parts = id.split("t");
     let partNumber = parts[1];
     this.router.navigate(["tabs/courses/course-details/course-parts/course-section"],{
@@ -88,5 +111,14 @@ export class CoursePartsPage implements OnInit {
           partNumber
         }
     });
+  }
+
+  wasCourseComplete(){
+    for(let i in this.completedCourses){
+        console.log(this.completedCourses[i].courseId);
+        if(this.courseId == this.completedCourses[i].courseId){
+          this.wasCourseCompleted = true;
+        }
+    }
   }
 }

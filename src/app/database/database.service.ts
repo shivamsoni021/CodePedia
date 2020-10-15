@@ -12,8 +12,8 @@ export interface CourseData {
 })
 export class DatabaseService {
 
-    constructor(private http: HttpClient) {
-    }
+    completedCourse=new Array();
+    constructor(private http: HttpClient) {}
 
     getCourses(courseType:string){
         return this.http.get(`https://codeshala-6dd34.firebaseio.com/courses/${courseType}.json`);
@@ -31,7 +31,25 @@ export class DatabaseService {
     isStudying(userID:string){
         return this.http.get(`https://codeshala-6dd34.firebaseio.com/users/${userID}/courseStudying.json`);
     }
+
+    completeCourses(userID:string,courseId:string,courseName:string,courseImage:string){
+        console.log(courseImage);
+        return this.http.post(`https://codeshala-6dd34.firebaseio.com/users/${userID}/coursesCompleted.json`,{
+           courseId , courseName ,courseImage        
+        });
+    }
+
+    getCompletedCourses(userID:string){
+        this.http.get(`https://codeshala-6dd34.firebaseio.com/users/${userID}/coursesCompleted.json`)
+        .subscribe((resData:any)=>{
+            for(const course in resData){
+                this.completedCourse.push(resData[course]);
+            }
+        });
+        console.log(this.completedCourse);
+    }
+
+    returnCompletedCourse(){
+        return this.completedCourse;
+    }
 }
-
-
-

@@ -23,6 +23,7 @@ export class CourseDetailsPage implements OnInit {
     imageUrl: string;
     userId: string;
     id: string;
+    courseName:string;
     courseStudying: CourseData[] = new Array();
 
     constructor(
@@ -56,6 +57,7 @@ export class CourseDetailsPage implements OnInit {
 
     setAllValues() {
         this.imageUrl = this.courseDetails.imageSrc;
+        this.courseName = this.courseDetails.name;
         this.description = this.courseDetails.description.split('TOSPLIT');
         this.requirements = this.courseDetails.requirement.split('TOSPLIT');
         this.benefits = this.courseDetails.benefits.split('TOSPLIT');
@@ -69,14 +71,14 @@ export class CourseDetailsPage implements OnInit {
         this.databaseService.enrollCourse(this.userId, this.id).subscribe((resData: any) => {
             console.log(resData);
         });
-        this.navigateToCoursePage(this.courseDetails.parts); 
+        this.navigateToCoursePage(this.courseDetails.parts,this.courseName , this.imageUrl); 
     }
 
     isStudying(value: any): boolean {
 
         if (value.courseId === this.id) {
             console.log(value.courseId);
-            this.navigateToCoursePage(this.courseDetails.parts);
+            this.navigateToCoursePage(this.courseDetails.parts,this.courseName , this.imageUrl);
         }
         else {
             return false;
@@ -84,7 +86,7 @@ export class CourseDetailsPage implements OnInit {
 
     }
 
-    navigateToCoursePage(courseDetails: any): void {
+    navigateToCoursePage(courseDetails: any ,courseName , image): void {
         this.loadingService.hideLoader();
         let courseType = this.courseType;
         let id = this.id;
@@ -92,7 +94,9 @@ export class CourseDetailsPage implements OnInit {
             state: {
                 courseDetails,
                 courseType,
-                id
+                id,
+                courseName,
+                image
             }
         });
     }

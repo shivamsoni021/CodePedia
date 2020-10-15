@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SegmentChangeEventDetail } from '@ionic/core';
+import { DatabaseService } from 'src/app/database/database.service';
 import { AuthService } from 'src/auth/auth.service';
 import { ProfileService } from './services/profile.service';
 
@@ -24,7 +25,7 @@ export class ProfilePage implements OnInit {
 
   isBadges=true;
   userId="";
-  coursesCompleted:{name:string, imageUrl: string , desc:string} []= new Array();
+  coursesCompleted;
   coursesStudying:string[]=new Array();
   badges:{ badge:string ,badgeDesc: string, imageUrl:string }[] = new Array();
   name:string;
@@ -34,11 +35,14 @@ export class ProfilePage implements OnInit {
   badgeArray:{badgeName:string , badgeImage:string}[]=new Array();
 
   constructor(private authService : AuthService,
-    private profileService : ProfileService) { } 
+    private profileService : ProfileService,
+    private databaseService: DatabaseService) { } 
   
     ngOnInit() {
     this.userId=this.authService.getUserId();
     console.log(this.userId);
+    this.coursesCompleted = this.databaseService.returnCompletedCourse();
+    console.log(this.coursesCompleted);
     this.profileService.getUserProfileData(this.userId).subscribe((resData:any)=>{        
       this.setAllValues(resData);
     });
@@ -51,11 +55,11 @@ export class ProfilePage implements OnInit {
 
   setAllValues(profileData : any){
 
-    for(const course in profileData.coursesCompleted){
-      this.coursesCompleted.push({name : profileData.coursesCompleted[course].name,
-        imageUrl: profileData.coursesCompleted[course].imageUrl,
-        desc: profileData.coursesCompleted[course].desc});
-    }
+    // for(const course in profileData.coursesCompleted){
+    //   this.coursesCompleted.push({name : profileData.coursesCompleted[course].name,
+    //     imageUrl: profileData.coursesCompleted[course].imageUrl,
+    //     desc: profileData.coursesCompleted[course].desc});
+    // }
 
     for(const badge in profileData.badges){
         this.badges.push({badge: profileData.badges[badge].badge 

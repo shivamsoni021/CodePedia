@@ -29,12 +29,14 @@ export class HomePage implements OnInit {
         private homeFormatterService: HomeFormatterService,
         private profileService: ProfileService,
         private homeService : HomeDatabase,
-        private router : Router
+        private router : Router,
+        private databaseService : DatabaseService
     ) { }
 
     ngOnInit() {  
         this.userId = this.authService.getUserId();
         this.loadEnrolledCourse();
+        this.databaseService.getCompletedCourses(this.userId);
         this.loadSuggestedCourse();        
     }
 
