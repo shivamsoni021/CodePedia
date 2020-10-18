@@ -2,6 +2,31 @@
 
     <div><img src="assets\icon\codeshala_home.png" /></div>
 
+    <ion-button (click)="postCourseToDb()">
+        Post
+    </ion-button>
+    <ion-button (click)="postCourseDetails()">
+        Post
+    </ion-button>
+    <ion-button (click)="postCourseContentsToDb()">
+        Post
+    </ion-button>
+    <ion-button (click)="postCoursesCommentsToFirebase()">
+        Post
+    </ion-button>
+    <ion-button (click)="getCourse()">
+        Get Course
+    </ion-button>
+    <ion-button (click)="getCourseComments()">
+        Get comments
+    </ion-button>
+    <ion-button (click)="getCourseContent()">
+        Get content
+    </ion-button>
+    <ion-button (click)="getCourseDetails()">
+        Get Det
+    </ion-button>
+
     <div *ngIf="!isStudying" class="studying">
         <ion-item lines="none" class="technology-title">
             <ion-icon (click)="navigation('studying')" slot="end" name="arrow-forward-outline"></ion-icon>

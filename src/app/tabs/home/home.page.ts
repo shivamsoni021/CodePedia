@@ -95,6 +95,122 @@ export class HomePage implements OnInit {
                 coursePreference
             }
         });
+
     }
 
+    postCourseToDb() {
+        const reqBody = {
+            description: 'This is very good course',
+            courseName: 'C',
+            imageSrc: '',
+            category: 'Programming Language',
+            isTrending: false,
+            isNew: false,
+            courseId: 123,
+            courseAuthor: 'Shivam Soni',
+            enrolledStudents: 50,
+            ratings: 4.5
+        };
+        this.homeService.postAllCoursesToFirebase(reqBody).subscribe(res => {
+            console.log('res', res);
+        });
+    }
+
+    postCourseDetails() {
+        const reqBody = {
+            courseId: 123,
+            courseIndex: {
+                chapterOne: {
+                    name: 'C Basics',
+                    id: 'cChapterOne',
+                    content: {
+                        point1: 'Compilation',
+                        point2: 'Source Code',
+                        point3: 'What is C?'
+                    }
+                },
+                chapterTwo: {
+                    name: 'Loops',
+                    id: 'cChapterTwo',
+                    content: {
+                        point1: 'For Loop',
+                        point2: 'While Loop',
+                        point3: 'Do While Loop'
+                    }
+                }
+            },
+            benefits: ['You can get Job in any fields', 'Get started with programming'],
+            requirements: ['PC', 'Internet Connection'],
+            authorName: 'Shivam Soni',
+            ratings: 4.5,
+            enrollments: 50000,
+            description: 'abusf fahnsoif aosbfias basof'
+        };
+
+        this.homeService.postCoursesDetailsToFirebase(reqBody).subscribe(res => {
+            console.log('cd', res);
+        })
+    }
+
+    postCourseContentsToDb() {
+        const reqBody = {
+            chapterId: 'cChapterOne',
+            point1: {
+                name: 'Compilation',
+                data: '10101010',
+                imageUrl: ''
+            },
+            point2: {
+                name: 'Source Code',
+                data: '10101010',
+                imageUrl: ''
+            },
+            point3: {
+                name: 'What is C?',
+                data: '10101010',
+                imageUrl: ''
+            }
+
+        };
+        this.homeService.postCoursesContentsToFirebase(reqBody, 123).subscribe(res => {
+            console.log('cd', res);
+        });
+    }
+
+    postCoursesCommentsToFirebase() {
+        const reqBody = {
+            userName: 'Shiva,m',
+            timeStamp: new Date(),
+            rating: 5,
+            comments: 'Very Good Course'
+        };
+        this.homeService.postCoursesCommentsToFirebase(reqBody, 123).subscribe(res => {
+            console.log('cd', res);
+        });
+    }
+
+    getCourse() {
+        this.homeService.getAllCoursesList().subscribe(res => {
+            console.log(res);
+        })
+    }
+
+
+    getCourseDetails() {
+        this.homeService.getCourseDetails(123).subscribe(res => {
+            console.log(res);
+        })
+    }
+
+    getCourseComments() {
+        this.homeService.getCourseComments(123).subscribe(res => {
+            console.log(res);
+        })
+    }
+
+    getCourseContent() {
+        this.homeService.getCourseContents(123,'cChapterOne').subscribe(res => {
+            console.log(res);
+        })
+    }
 }

@@ -1,31 +1,64 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
+import { BASE_URL, ENDPOINTS } from 'src/app/constants/app.constants';
 
 @Injectable({
     providedIn: 'root'
 })
-export class HomeDatabase{
-    constructor(private http : HttpClient){}
+export class HomeDatabase {
+    constructor(private http: HttpClient) { }
 
-    loadEnrolledCourse(courseId:string){
-        let courseType="";
+    loadEnrolledCourse(courseId: string) {
+        let courseType = '';
 
-        if(courseId.match("a")){
-            courseType = "allTechnology";
+        if (courseId.match('a')) {
+            courseType = 'allTechnology';
         }
-        else if(courseId.match("tt")){
-            courseType = "trending";
+        else if (courseId.match('tt')) {
+            courseType = 'trending';
         }
-        else if(courseId.match("st")){
-            courseType= "scripting";
+        else if (courseId.match('st')) {
+            courseType = 'scripting';
         }
-        else if(courseId.match("wt")){
-            courseType="webTech";
+        else if (courseId.match('wt')) {
+            courseType = 'webTech';
         }
         return this.http.get(`https://codeshala-6dd34.firebaseio.com/courses/${courseType}/${courseId}.json`);
     }
 
-    loadSuggestedCourse(){
+    loadSuggestedCourse() {
         return this.http.get(`https://codeshala-6dd34.firebaseio.com/courses/homescreen.json`);
     }
+
+    postAllCoursesToFirebase(requestParams = {}) {
+        return this.http.post(`${BASE_URL}/${ENDPOINTS.ALL_COURSES}.json`, requestParams);
+    }
+
+    getAllCoursesList() {
+        return this.http.get(`${BASE_URL}/${ENDPOINTS.ALL_COURSES}.json`);
+    }
+
+    postCoursesDetailsToFirebase(requestParams = {}) {
+        return this.http.post(`${BASE_URL}/${ENDPOINTS.COURSE_DETAILS}.json`, requestParams);
+    }
+    getCourseDetails(courseId) {
+        return this.http.get(`${BASE_URL}/${ENDPOINTS.COURSE_DETAILS}.json?orderBy="courseId"&equalTo="${courseId}"`);
+    }
+
+    postCoursesContentsToFirebase(requestParams = {}, courseId: number) {
+        return this.http.post(`${BASE_URL}/${ENDPOINTS.COURSE_CONTENT}/${courseId}.json`, requestParams);
+    }
+
+    getCourseContents(courseId, chapterName) {
+        return this.http.get(`${BASE_URL}/${ENDPOINTS.COURSE_CONTENT}/${courseId}.json?orderBy="chapterId"&equalTo="${chapterName}"`);
+    }
+
+    postCoursesCommentsToFirebase(requestParams = {}, courseId: number) {
+        return this.http.post(`${BASE_URL}/${ENDPOINTS.USER_COMMENTS}/${courseId}.json`, requestParams);
+    }
+
+    getCourseComments(courseId) {
+        return this.http.get(`${BASE_URL}/${ENDPOINTS.USER_COMMENTS}/${courseId}.json`);
+    }
+
 }
