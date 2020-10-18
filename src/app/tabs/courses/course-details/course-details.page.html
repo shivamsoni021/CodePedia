@@ -11,6 +11,17 @@
         <img class="subject-img" [src]="imageUrl" />
     </div>
     <div class="all-post">
+        <h5>About Course</h5>
+    </div>
+    <ion-item lines="none">
+        <ion-icon slot="start" name="chevron-forward-circle-sharp" size="small" color="danger"></ion-icon>
+        <ion-label class="points-font"> <span class="rating">4.5/5</span><ion-icon class="icon-rating" name="star"></ion-icon> 275,00 Students </ion-label>
+    </ion-item>
+    <ion-item lines="none">
+        <ion-icon slot="start" name="chevron-forward-circle-sharp" size="small" color="danger"></ion-icon>
+        <ion-label class="points-font"> Created By Shivam Soni </ion-label>
+    </ion-item>
+    <div class="all-post"  *ngIf="courseDetails.atDescription">
         <h5>Description</h5>
     </div>
     <ion-item lines="none" *ngIf="courseDetails.atDescription">

@@ -27,3 +27,13 @@ ion-content {
     font-size: 14px;
     font-family: Nunito-Regular;
 }
+
+.rating{
+    display: inline-block;
+}
+.icon-rating{
+    display: inline-block;
+    vertical-align: bottom;
+    color: orange;
+    padding: 0 5px;
+}
