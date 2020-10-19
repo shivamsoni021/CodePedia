@@ -4,6 +4,7 @@ import { DatabaseService } from 'src/app/database/database.service';
 import { HomeTechnology } from 'src/app/interfaces/home-technology.interface';
 import { LoadingService } from 'src/app/services/loading.service';
 import { AuthService } from 'src/auth/auth.service';
+import { HomeDatabase } from '../../home/services/homedb.service';
 interface CourseData {
     courseId: string[];
 }
@@ -14,8 +15,8 @@ interface CourseData {
 })
 export class CourseDetailsPage implements OnInit {
 
-    courseDetails: HomeTechnology;
-    courseType:string;
+    courseDetails: any ;
+    courseType: string;
     requirements: string[] = new Array();
     benefits: string[] = new Array();
     wlearn: string[] = new Array();
@@ -23,73 +24,100 @@ export class CourseDetailsPage implements OnInit {
     imageUrl: string;
     userId: string;
     id: string;
-    courseName:string;
+    courseName: string;
     courseStudying: CourseData[] = new Array();
 
+
+    selectedCourseId: number;
     constructor(
         private authService: AuthService,
         private databaseService: DatabaseService,
         private router: Router,
-        private loadingService: LoadingService
+        private loadingService: LoadingService,
+        private homeService: HomeDatabase,
     ) { }
 
     ngOnInit() {
 
-        this.courseDetails = window.history.state.courseDetails;
+       
+        // this.courseDetails = window.history.state.courseDetails;
         this.courseType = window.history.state.courseType;
         console.log(this.courseType);
         this.userId = this.authService.getUserId();
-        this.id = this.courseDetails.id;
-        this.databaseService.isStudying(this.userId).subscribe((resData: any) => {
-            // tslint:disable-next-line: forin
-            for (const course in resData) {
-                this.courseStudying.push(resData[course]);
-            }
-            console.log(this.courseStudying);
-            this.courseStudying.forEach((value: any) => {
-                this.isStudying(value);
-            });
-            this.loadingService.hideLoader();
-        });
+        // this.id = this.courseDetails.id;
+        // this.databaseService.isStudying(this.userId).subscribe((resData: any) => {
+        //     // tslint:disable-next-line: forin
+        //     for (const course in resData) {
+        //         this.courseStudying.push(resData[course]);
+        //     }
+        //     console.log(this.courseStudying);
+        //     this.courseStudying.forEach((value: any) => {
+        //         this.isStudying(value);
+        //     });
+        //     this.loadingService.hideLoader();
+        // });
 
-        this.setAllValues();
+
+      //  this.setAllValues();
+    }
+
+    ionViewWillEnter() {
+        this.selectedCourseId = window.history.state.courseId;
+        this.getCourseDetails();
+    }
+
+    getCourseDetails() {
+        console.log(this.selectedCourseId)
+        this.homeService.getCourseDetails(this.selectedCourseId).subscribe(res => {
+            console.log(res);
+            const d: any = [];
+            // tslint:disable-next-line: forin
+            for (const course in res) {
+               this.courseDetails = res[course];
+            }
+
+            // if (d) {
+            //     this.requirements = d.requirements;
+            //     this.description = d.description;
+            // }
+        });
     }
 
     setAllValues() {
-        this.imageUrl = this.courseDetails.imageSrc;
-        this.courseName = this.courseDetails.name;
-        this.description = this.courseDetails.description.split('TOSPLIT');
-        this.requirements = this.courseDetails.requirement.split('TOSPLIT');
-        this.benefits = this.courseDetails.benefits.split('TOSPLIT');
-        this.wlearn = this.courseDetails.wlearn.split('TOSPLIT');
-        this.id = this.courseDetails.id;
+        // this.imageUrl = this.courseDetails.imageSrc;
+        // this.courseName = this.courseDetails.name;
+        // this.description = this.courseDetails.description.split('TOSPLIT');
+        // this.requirements = this.courseDetails.requirement.split('TOSPLIT');
+        // this.benefits = this.courseDetails.benefits.split('TOSPLIT');
+        // this.wlearn = this.courseDetails.wlearn.split('TOSPLIT');
+        // this.id = this.courseDetails.id;
 
     }
 
-    enrollCourse() {
+    // enrollCourse() {
 
-        this.databaseService.enrollCourse(this.userId, this.id).subscribe((resData: any) => {
-            console.log(resData);
-        });
-        this.navigateToCoursePage(this.courseDetails.parts,this.courseName , this.imageUrl); 
-    }
+    //     this.databaseService.enrollCourse(this.userId, this.id).subscribe((resData: any) => {
+    //         console.log(resData);
+    //     });
+    //     this.navigateToCoursePage(this.courseDetails.parts, this.courseName, this.imageUrl);
+    // }
 
-    isStudying(value: any): boolean {
+    // isStudying(value: any): boolean {
 
-        if (value.courseId === this.id) {
-            console.log(value.courseId);
-            this.navigateToCoursePage(this.courseDetails.parts,this.courseName , this.imageUrl);
-        }
-        else {
-            return false;
-        }
+    //     if (value.courseId === this.id) {
+    //         console.log(value.courseId);
+    //         this.navigateToCoursePage(this.courseDetails.parts, this.courseName, this.imageUrl);
+    //     }
+    //     else {
+    //         return false;
+    //     }
 
-    }
+    // }
 
-    navigateToCoursePage(courseDetails: any ,courseName , image): void {
+    navigateToCoursePage(courseDetails: any, courseName, image): void {
         this.loadingService.hideLoader();
-        let courseType = this.courseType;
-        let id = this.id;
+        const courseType = this.courseType;
+        const id = this.id;
         this.router.navigate(['tabs/courses/course-details/course-parts'], {
             state: {
                 courseDetails,

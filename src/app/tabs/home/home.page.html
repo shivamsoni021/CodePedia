@@ -27,6 +27,32 @@
         Get Det
     </ion-button>
 
+    <ion-item lines="none" class="technology-title">
+        <ion-icon (click)="navigation('studying')" slot="end" name="arrow-forward-outline"></ion-icon>
+        <ion-label class="all-post">
+            <h5>
+                All Courses
+            </h5>
+        </ion-label>
+    </ion-item>
+    <ion-slides #slides [options]="sliderOptions" class="preview-desc-slides">
+        <ion-slide (click)="navigateToCourseDetails(item)" *ngFor="let item of allCourses; index as itemIndex" class="slide">
+            <div class="container">
+                <div class="image" [ngClass]="{'course-image' : item.type === 'course'}">
+                    <img [src]="item.imageSrc ? item.imageSrc : '../../../assets/images/default-poster.png'">
+                </div>
+                <p class="name">{{item.courseName}}</p>
+                <p *ngIf="item.courseAuthor" class="description">{{item.courseAuthor}}</p>
+                <div class="rating-wrapper">
+
+                    <span *ngIf="item.ratings !== null && item.ratings !== undefined" class="rating"><img
+                            src="../../../assets/images/rate.svg">{{item.ratings}}/5</span>
+                    <span *ngIf="item.enrolledStudents" class="students">{{item.enrolledStudents}}<ion-icon name="people"></ion-icon></span>
+                </div>
+            </div>
+        </ion-slide>
+    </ion-slides>
+
     <div *ngIf="!isStudying" class="studying">
         <ion-item lines="none" class="technology-title">
             <ion-icon (click)="navigation('studying')" slot="end" name="arrow-forward-outline"></ion-icon>
@@ -85,4 +111,6 @@
             </ion-slide>
         </ion-slides> -->
     </div>
+
+    
 </ion-content>

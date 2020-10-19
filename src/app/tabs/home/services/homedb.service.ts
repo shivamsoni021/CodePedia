@@ -42,7 +42,7 @@ export class HomeDatabase {
         return this.http.post(`${BASE_URL}/${ENDPOINTS.COURSE_DETAILS}.json`, requestParams);
     }
     getCourseDetails(courseId) {
-        return this.http.get(`${BASE_URL}/${ENDPOINTS.COURSE_DETAILS}.json?orderBy="courseId"&equalTo="${courseId}"`);
+        return this.http.get(`${BASE_URL}/${ENDPOINTS.COURSE_DETAILS}.json?orderBy="courseId"&equalTo=${courseId}`);
     }
 
     postCoursesContentsToFirebase(requestParams = {}, courseId: number) {

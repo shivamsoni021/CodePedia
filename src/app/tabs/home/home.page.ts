@@ -24,6 +24,15 @@ export class HomePage implements OnInit {
     enrolledCourses: SliderConfiguration;
     suggestedCourses: SliderConfiguration;
     coursePreference = '';
+
+    allCourses = [];
+
+    sliderOptions = {
+        slidesPerView: 3,
+        freeMode: true,
+        spaceBetween: 10
+    };
+
     constructor(
         private authService: AuthService,
         private homeFormatterService: HomeFormatterService,
@@ -118,7 +127,7 @@ export class HomePage implements OnInit {
 
     postCourseDetails() {
         const reqBody = {
-            courseId: 123,
+            courseId: 1236,
             courseIndex: {
                 chapterOne: {
                     name: 'C Basics',
@@ -140,9 +149,9 @@ export class HomePage implements OnInit {
                 }
             },
             benefits: ['You can get Job in any fields', 'Get started with programming'],
-            requirements: ['PC', 'Internet Connection'],
-            authorName: 'Shivam Soni',
-            ratings: 4.5,
+            requirements: ['MAC', 'Internet Connection'],
+            authorName: 'Kailash',
+            ratings: 2.0,
             enrollments: 50000,
             description: 'abusf fahnsoif aosbfias basof'
         };
@@ -190,9 +199,21 @@ export class HomePage implements OnInit {
     }
 
     getCourse() {
-        this.homeService.getAllCoursesList().subscribe(res => {
-            console.log(res);
-        })
+        this.homeService.getAllCoursesList().subscribe(allCourses => {
+            console.log(allCourses);
+            // tslint:disable-next-line: forin
+            for (const course in allCourses) {
+                this.allCourses.push(allCourses[course]);
+            }
+        });
+    }
+
+    navigateToCourseDetails(selectedCourseDetails) {
+        this.router.navigate(['tabs/courses/course-details'], {
+            state: {
+                courseId: selectedCourseDetails.courseId
+            }
+        });
     }
 
 
