@@ -26,6 +26,8 @@ export class HomePage implements OnInit {
     coursePreference = '';
 
     allCourses = [];
+    trendingCourse = [];
+    newCourses = [];
 
     sliderOptions = {
         slidesPerView: 3,
@@ -47,6 +49,9 @@ export class HomePage implements OnInit {
         this.loadEnrolledCourse();
         this.databaseService.getCompletedCourses(this.userId);
         this.loadSuggestedCourse();
+        this.getCourse();
+        this.getTrendingCourses();
+        this.getNewCourses();
     }
 
     loadEnrolledCourse() {
@@ -198,9 +203,11 @@ export class HomePage implements OnInit {
         });
     }
 
+    /**
+     * This method is used for getting all courses from database
+     */
     getCourse() {
         this.homeService.getAllCoursesList().subscribe(allCourses => {
-            console.log(allCourses);
             // tslint:disable-next-line: forin
             for (const course in allCourses) {
                 this.allCourses.push(allCourses[course]);
@@ -208,8 +215,36 @@ export class HomePage implements OnInit {
         });
     }
 
+    /**
+     * This method is used for getting all trending courses
+     */
+    getTrendingCourses() {
+        this.homeService.getCoursesByParams('isTrending').subscribe(trendingCourses => {
+            // tslint:disable-next-line: forin
+            for (const course in trendingCourses) {
+                this.trendingCourse.push(trendingCourses[course]);
+            }
+        });
+    }
+
+    /**
+     * This method is used for getting all new courses
+     */
+    getNewCourses() {
+        this.homeService.getCoursesByParams('isNew').subscribe(newCourses => {
+            // tslint:disable-next-line: forin
+            for (const course in newCourses) {
+                this.newCourses.push(newCourses[course]);
+            }
+        });
+    }
+
+    /**
+     * This method is used for navigating to selected course details
+     * @param selectedCourseDetails selected course on which we want to navigate and see details
+     */
     navigateToCourseDetails(selectedCourseDetails) {
-        this.router.navigate(['tabs/courses/course-details'], {
+        this.router.navigate(['tabs/home/course-details'], {
             state: {
                 courseId: selectedCourseDetails.courseId
             }
@@ -230,7 +265,7 @@ export class HomePage implements OnInit {
     }
 
     getCourseContent() {
-        this.homeService.getCourseContents(123,'cChapterOne').subscribe(res => {
+        this.homeService.getCourseContents(123, 'cChapterOne').subscribe(res => {
             console.log(res);
         })
     }

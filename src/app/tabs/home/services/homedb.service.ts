@@ -38,6 +38,10 @@ export class HomeDatabase {
         return this.http.get(`${BASE_URL}/${ENDPOINTS.ALL_COURSES}.json`);
     }
 
+    getCoursesByParams(type: string) {
+        return this.http.get(`${BASE_URL}/${ENDPOINTS.ALL_COURSES}.json?orderBy="${type}"&equalTo=true`);
+    }
+
     postCoursesDetailsToFirebase(requestParams = {}) {
         return this.http.post(`${BASE_URL}/${ENDPOINTS.COURSE_DETAILS}.json`, requestParams);
     }
