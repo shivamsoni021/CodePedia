@@ -77,6 +77,7 @@ export class CourseDetailsPage implements OnInit {
             for (const course in res) {
                 this.courseDetails = res[course];
             }
+            console.log(this.courseDetails);
         });
     }
 
@@ -98,7 +99,7 @@ export class CourseDetailsPage implements OnInit {
         this.databaseService.enrollCourse(this.userId, this.selectedCourseId).subscribe((resData: any) => {
             this.toastService.showToast('Course enrolled successfully', 'success');
         });
-        this.navigateToCoursePage(this.courseDetails.parts, this.courseName, this.imageUrl);
+        this.navigateToCoursePage(this.courseDetails.courseIndex, this.courseDetails.courseName, this.imageUrl);
     }
 
     // isStudying(value: any): boolean {
@@ -113,14 +114,12 @@ export class CourseDetailsPage implements OnInit {
 
     // }
 
-    navigateToCoursePage(courseDetails: any, courseName, image): void {
+    navigateToCoursePage(courseDetails: any, courseName: string, image: string): void {
         this.loadingService.hideLoader();
-        const courseType = this.courseType;
-        const id = this.id;
-        this.router.navigate(['tabs/courses/course-details/course-parts'], {
+        const id = this.selectedCourseId;
+        this.router.navigate(['tabs/home/course-details/course-parts'], {
             state: {
                 courseDetails,
-                courseType,
                 id,
                 courseName,
                 image

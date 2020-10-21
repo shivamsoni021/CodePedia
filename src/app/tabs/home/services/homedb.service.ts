@@ -73,7 +73,12 @@ export class HomeDatabase {
         return this.http.post(`${BASE_URL}/${ENDPOINTS.COURSE_CONTENT}/${courseId}.json`, requestParams);
     }
 
-    getCourseContents(courseId, chapterName) {
+    /**
+     * This method is used for getting course content
+     * @param courseId Selected course id
+     * @param chapterName selected chapter name
+     */
+    getCourseContents(courseId: number, chapterName: string) {
         return this.http.get(`${BASE_URL}/${ENDPOINTS.COURSE_CONTENT}/${courseId}.json?orderBy="chapterId"&equalTo="${chapterName}"`);
     }
 

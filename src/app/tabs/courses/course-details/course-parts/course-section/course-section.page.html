@@ -14,7 +14,7 @@
   </ion-grid>
   
   <ion-slides pager="false" [options]="slideOpts" #slider>
-            <ion-slide *ngFor="let heading of content">
+            <ion-slide *ngFor="let heading of content; index as i">
                 <ion-card>
                   
                     <ion-card-header>
@@ -22,7 +22,7 @@
                     </ion-card-header>
                     <ion-card-content>
                       <ion-img width="200" height="200" [src]="heading.imageUrl"></ion-img>
-                        <p>{{ heading.data }}</p>
+                        <p>{{ (heading.point+i+1).data }}</p>
                         <ion-button *ngIf="!isEnd" (click)="swipeNext()">Next</ion-button>
                         <ion-button *ngIf="isEnd" (click)="onComplete()">Continue</ion-button>
                       </ion-card-content>
