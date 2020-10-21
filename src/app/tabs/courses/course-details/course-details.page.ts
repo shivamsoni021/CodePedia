@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { DatabaseService } from 'src/app/database/database.service';
 import { HomeTechnology } from 'src/app/interfaces/home-technology.interface';
 import { LoadingService } from 'src/app/services/loading.service';
+import { ToastService } from 'src/app/services/toast.service';
 import { AuthService } from 'src/auth/auth.service';
 import { HomeDatabase } from '../../home/services/homedb.service';
 interface CourseData {
@@ -15,7 +16,7 @@ interface CourseData {
 })
 export class CourseDetailsPage implements OnInit {
 
-    courseDetails: any ;
+    courseDetails: any;
     courseType: string;
     requirements: string[] = new Array();
     benefits: string[] = new Array();
@@ -35,11 +36,12 @@ export class CourseDetailsPage implements OnInit {
         private router: Router,
         private loadingService: LoadingService,
         private homeService: HomeDatabase,
+        private toastService: ToastService
     ) { }
 
     ngOnInit() {
 
-       
+
         // this.courseDetails = window.history.state.courseDetails;
         this.courseType = window.history.state.courseType;
         console.log(this.courseType);
@@ -58,7 +60,7 @@ export class CourseDetailsPage implements OnInit {
         // });
 
 
-      //  this.setAllValues();
+        //  this.setAllValues();
     }
 
     ionViewWillEnter() {
@@ -73,13 +75,8 @@ export class CourseDetailsPage implements OnInit {
             const d: any = [];
             // tslint:disable-next-line: forin
             for (const course in res) {
-               this.courseDetails = res[course];
+                this.courseDetails = res[course];
             }
-
-            // if (d) {
-            //     this.requirements = d.requirements;
-            //     this.description = d.description;
-            // }
         });
     }
 
@@ -94,13 +91,15 @@ export class CourseDetailsPage implements OnInit {
 
     }
 
-    // enrollCourse() {
-
-    //     this.databaseService.enrollCourse(this.userId, this.id).subscribe((resData: any) => {
-    //         console.log(resData);
-    //     });
-    //     this.navigateToCoursePage(this.courseDetails.parts, this.courseName, this.imageUrl);
-    // }
+    /**
+     * This method is used for enrolling selected course
+     */
+    enrollCourse() {
+        this.databaseService.enrollCourse(this.userId, this.selectedCourseId).subscribe((resData: any) => {
+            this.toastService.showToast('Course enrolled successfully', 'success');
+        });
+        this.navigateToCoursePage(this.courseDetails.parts, this.courseName, this.imageUrl);
+    }
 
     // isStudying(value: any): boolean {
 

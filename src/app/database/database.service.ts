@@ -12,44 +12,49 @@ export interface CourseData {
 })
 export class DatabaseService {
 
-    completedCourse=new Array();
-    constructor(private http: HttpClient) {}
+    completedCourse = new Array();
+    constructor(private http: HttpClient) { }
 
-    getCourses(courseType:string){
+    getCourses(courseType: string) {
         return this.http.get(`https://codeshala-6dd34.firebaseio.com/courses/${courseType}.json`);
     }
-    
-    getEnrolledCourse(userID :string , courseId:string){
+
+    getEnrolledCourse(userID: string, courseId: string) {
         return this.http.get(`https://codeshala-6dd34.firebaseio.com/users/${userID}.json`);
     }
-    
-    enrollCourse(userID : string,courseId:string){
+
+    /**
+     * This method is used for enrolling used to selected course
+     * @param userID Users uuid
+     * @param courseId course id
+     */
+    enrollCourse(userID: string, courseId: number) {
         return this.http.post(`https://codeshala-6dd34.firebaseio.com/users/${userID}/courseStudying.json`,
-            {courseId,progress:""});
+            { courseId, progress: 0 });
     }
 
-    isStudying(userID:string){
+    isStudying(userID: string) {
         return this.http.get(`https://codeshala-6dd34.firebaseio.com/users/${userID}/courseStudying.json`);
     }
 
-    completeCourses(userID:string,courseId:string,courseName:string,courseImage:string){
+    completeCourses(userID: string, courseId: string, courseName: string, courseImage: string) {
         console.log(courseImage);
-        return this.http.post(`https://codeshala-6dd34.firebaseio.com/users/${userID}/coursesCompleted.json`,{
-           courseId , courseName ,courseImage        
+        return this.http.post(`https://codeshala-6dd34.firebaseio.com/users/${userID}/coursesCompleted.json`, {
+            courseId, courseName, courseImage
         });
     }
 
-    getCompletedCourses(userID:string){
+    getCompletedCourses(userID: string) {
         this.http.get(`https://codeshala-6dd34.firebaseio.com/users/${userID}/coursesCompleted.json`)
-        .subscribe((resData:any)=>{
-            for(const course in resData){
-                this.completedCourse.push(resData[course]);
-            }
-        });
+            .subscribe((resData: any) => {
+                for (const course in resData) {
+                    this.completedCourse.push(resData[course]);
+                }
+            });
         console.log(this.completedCourse);
     }
 
-    returnCompletedCourse(){
+    returnCompletedCourse() {
         return this.completedCourse;
     }
 }

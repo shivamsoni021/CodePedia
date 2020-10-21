@@ -21,13 +21,14 @@ export class HomePage implements OnInit {
     technologyTitle = 'Shivam';
     technologies: SliderConfiguration;
     isStudying = false;
-    enrolledCourses: SliderConfiguration;
+   // enrolledCourses: SliderConfiguration;
     suggestedCourses: SliderConfiguration;
     coursePreference = '';
 
     allCourses = [];
     trendingCourse = [];
     newCourses = [];
+    enrolledCourses = [];
 
     sliderOptions = {
         slidesPerView: 3,
@@ -48,22 +49,30 @@ export class HomePage implements OnInit {
         this.userId = this.authService.getUserId();
         this.loadEnrolledCourse();
         this.databaseService.getCompletedCourses(this.userId);
-        this.loadSuggestedCourse();
+        // this.loadSuggestedCourse();
         this.getCourse();
         this.getTrendingCourses();
         this.getNewCourses();
     }
 
+    /**
+     * This method is used for loading all enrolled courses
+     */
     loadEnrolledCourse() {
         const temData = [];
         this.profileService.getEnrolledCourse(this.userId).subscribe((resData: any) => {
             // tslint:disable-next-line: forin
             for (const course in resData) {
-                this.homeService.loadEnrolledCourse(resData[course].courseId).subscribe((data: any) => {
-                    temData.push(data);
-                    if (temData.length) {
-                        this.enrolledCourses = this.homeFormatterService.getFormattedTechnologyData(temData);
+                console.log(resData[course]);
+                this.homeService.getEnrolledCourses(resData[course].courseId).subscribe((data: any) => {
+                     // tslint:disable-next-line: forin
+                    for (const cour in data) {
+                        this.enrolledCourses.push(data[cour]);
                     }
+                    // temData.push(data);
+                    // if (temData.length) {
+                    //     this.enrolledCoursess = this.homeFormatterService.getFormattedTechnologyData(temData);
+                    // }
                 });
             }
         });
@@ -238,6 +247,16 @@ export class HomePage implements OnInit {
             }
         });
     }
+
+    getEnrolledCourses() {
+        this.homeService.getCoursesByParams('isNew').subscribe(newCourses => {
+            // tslint:disable-next-line: forin
+            for (const course in newCourses) {
+                this.newCourses.push(newCourses[course]);
+            }
+        });
+    }
+
 
     /**
      * This method is used for navigating to selected course details

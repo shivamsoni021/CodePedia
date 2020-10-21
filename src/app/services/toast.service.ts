@@ -14,7 +14,7 @@ export class ToastService {
         const toast = await this.toastController.create({
             header: headerText ? headerText : '',
             message,
-            cssClass: 'frenzi-toast',
+            cssClass: 'code-pedia-toast',
             duration: 3 * 1000,
             color: type
         });

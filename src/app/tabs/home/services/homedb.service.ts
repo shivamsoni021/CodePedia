@@ -34,18 +34,38 @@ export class HomeDatabase {
         return this.http.post(`${BASE_URL}/${ENDPOINTS.ALL_COURSES}.json`, requestParams);
     }
 
+    /**
+     * This method is used for getting all courses list
+     */
     getAllCoursesList() {
         return this.http.get(`${BASE_URL}/${ENDPOINTS.ALL_COURSES}.json`);
     }
 
+    /**
+     * This method is used for getting courses list based on their types like new or trending
+     * @param type course type ex trending or new
+     */
     getCoursesByParams(type: string) {
         return this.http.get(`${BASE_URL}/${ENDPOINTS.ALL_COURSES}.json?orderBy="${type}"&equalTo=true`);
+    }
+
+    /**
+     * This method is used for getting enrolled courses
+     * @param courseId selected course id
+     */
+    getEnrolledCourses(courseId: number) {
+        return this.http.get(`${BASE_URL}/${ENDPOINTS.ALL_COURSES}.json?orderBy="courseId"&equalTo=${courseId}`);
     }
 
     postCoursesDetailsToFirebase(requestParams = {}) {
         return this.http.post(`${BASE_URL}/${ENDPOINTS.COURSE_DETAILS}.json`, requestParams);
     }
-    getCourseDetails(courseId) {
+
+    /**
+     * This method is used for getting selected course details
+     * @param courseId course id for which we need to show details
+     */
+    getCourseDetails(courseId: number) {
         return this.http.get(`${BASE_URL}/${ENDPOINTS.COURSE_DETAILS}.json?orderBy="courseId"&equalTo=${courseId}`);
     }
 

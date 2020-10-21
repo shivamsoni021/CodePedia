@@ -36,7 +36,25 @@
                 </h5>
             </ion-label>
         </ion-item>
-        <app-slider (itemClick)="navigateToCoursePage($event)" [sliderConfiguration]="enrolledCourses"></app-slider>
+        <ion-slides #slides [options]="sliderOptions" class="preview-desc-slides">
+            <ion-slide (click)="navigateToCourseDetails(item)" *ngFor="let item of enrolledCourses; index as itemIndex"
+                class="slide">
+                <div class="container">
+                    <div class="image" [ngClass]="{'course-image' : item.type === 'course'}">
+                        <img [src]="item.imageSrc ? item.imageSrc : '../../../assets/images/default-poster.png'">
+                    </div>
+                    <p class="name">{{item.courseName}}</p>
+                    <p *ngIf="item.courseAuthor" class="description">{{item.courseAuthor}}</p>
+                    <div class="rating-wrapper">
+    
+                        <span *ngIf="item.ratings !== null && item.ratings !== undefined" class="rating"><img
+                                src="../../../assets/images/rate.svg">{{item.ratings}}/5</span>
+                        <span *ngIf="item.enrolledStudents" class="students">{{item.enrolledStudents}}<ion-icon
+                                name="people"></ion-icon></span>
+                    </div>
+                </div>
+            </ion-slide>
+        </ion-slides>
     </div>
 
     <ion-item lines="none" class="technology-title">
@@ -125,25 +143,4 @@
             </div>
         </ion-slide>
     </ion-slides>
-
-
-
-    <div class="technologies">
-        <ion-item lines="none" class="technology-title">
-            <ion-icon (click)="navigation('all-courses')" slot="end" name="arrow-forward-outline"></ion-icon>
-            <ion-label *ngIf="!isStudying" class="all-post">
-                <h5>
-                    Start Learning
-                </h5>
-            </ion-label>
-            <ion-label *ngIf="isStudying" class="all-post">
-                <h5>
-                    Learn New Skill
-                </h5>
-            </ion-label>
-        </ion-item>
-        <app-slider (itemClick)="navigateToCoursePage($event)" [sliderConfiguration]="suggestedCourses"></app-slider>
-    </div>
-
-
 </ion-content>

@@ -15,13 +15,15 @@
     </div>
     <ion-item lines="none">
         <ion-icon slot="start" name="chevron-forward-circle-sharp" size="small" color="danger"></ion-icon>
-        <ion-label class="points-font"> <span class="rating">{{courseDetails?.ratings}}/5</span><ion-icon class="icon-rating" name="star"></ion-icon> 275,00 Students </ion-label>
+        <ion-label class="points-font"> <span class="rating">{{courseDetails?.ratings}}/5</span>
+            <ion-icon class="icon-rating" name="star"></ion-icon> 275,00 Students
+        </ion-label>
     </ion-item>
     <ion-item lines="none">
         <ion-icon slot="start" name="chevron-forward-circle-sharp" size="small" color="danger"></ion-icon>
         <ion-label class="points-font"> Created By {{courseDetails?.authorName}} </ion-label>
     </ion-item>
-    <div class="all-post"  *ngIf="courseDetails?.description">
+    <div class="all-post" *ngIf="courseDetails?.description">
         <h5>Description</h5>
     </div>
     <ion-item lines="none" *ngIf="courseDetails?.description">
@@ -55,6 +57,7 @@
             <ion-label class="points-font">{{ benefits }}</ion-label>
         </ion-item>
     </div>
-    <!-- <ion-button (click)="enrollCourse()" expand="block" color="tertiary" shape="round" class="rounded">
-        <ion-icon name="create-outline" slot="start"></ion-icon>Enroll Now</ion-button> -->
+    <ion-button (click)="enrollCourse()" expand="block" color="tertiary" shape="round" class="rounded">
+        <ion-icon name="create-outline" slot="start"></ion-icon>Enroll Now
+    </ion-button>
 </ion-content>
