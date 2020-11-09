@@ -8,7 +8,7 @@
 </ion-header>
 <ion-content>
     <div class="image">
-        <img class="subject-img" [src]="imageUrl" />
+        <img class="subject-img" [src]="courseDetails?.imageUrl" />
     </div>
     <div class="all-post">
         <h5>About Course</h5>
@@ -30,7 +30,7 @@
         <ion-icon slot="start" name="chevron-forward-circle-sharp" size="small" color="danger"></ion-icon>
         <ion-label class="points-font">{{courseDetails.description}}</ion-label>
     </ion-item>
-    <div class="all-post">
+    <!-- <div class="all-post">
         <h5>What you'll Learn</h5>
     </div>
     <div *ngFor="let currentwlearn of wlearn">
@@ -38,7 +38,7 @@
             <ion-icon slot="start" name="chevron-forward-circle-sharp" size="small" color="danger"></ion-icon>
             <ion-label class="points-font">{{ currentwlearn }}</ion-label>
         </ion-item>
-    </div>
+    </div> -->
     <div class="all-post">
         <h5>Requirement</h5>
     </div>

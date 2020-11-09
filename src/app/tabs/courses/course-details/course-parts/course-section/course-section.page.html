@@ -18,11 +18,11 @@
                 <ion-card>
                   
                     <ion-card-header>
-                        <ion-card-title>{{ heading.heading }}</ion-card-title>
+                        <ion-card-title>{{ heading.name }}</ion-card-title>
                     </ion-card-header>
                     <ion-card-content>
                       <ion-img width="200" height="200" [src]="heading.imageUrl"></ion-img>
-                        <p>{{ (heading.point+i+1).data }}</p>
+                        <p>{{ heading.data }}</p>
                         <ion-button *ngIf="!isEnd" (click)="swipeNext()">Next</ion-button>
                         <ion-button *ngIf="isEnd" (click)="onComplete()">Continue</ion-button>
                       </ion-card-content>

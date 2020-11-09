@@ -110,13 +110,24 @@ export class CoursePartsPage implements OnInit {
     navigateToSectionPage(currentPart: Parts, id: string) {
         // this.homeService.getCourseContents(this.courseDetails.courseId, id).subscribe(res => {
             console.log(this.courseId);
-            this.router.navigate(['tabs/home/course-details/course-parts/course-section'], {
-                state: {
-                    currentPart,
-                    id,
-                    courseId: this.courseId
-                }
-            });
+            if (this.router.url.includes('tabs/home')) {
+
+                this.router.navigate(['tabs/home/course-details/course-parts/course-section'], {
+                    state: {
+                        currentPart,
+                        id,
+                        courseId: this.courseId
+                    }
+                });
+            } else   if (this.router.url.includes('tabs/courses')) {
+                this.router.navigate(['tabs/courses/course-details/course-parts/course-section'], {
+                    state: {
+                        currentPart,
+                        id,
+                        courseId: this.courseId
+                    }
+                });
+            }
         // });
     }
 

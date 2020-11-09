@@ -50,12 +50,9 @@ export class CourseSectionPage implements OnInit {
             // tslint:disable-next-line: forin
             for (const heading in res) {
                 console.log(res[heading]);
-                this.content.push({
-                    heading,
-                    imageUrl: res[heading].imageUrl
-                    , data: res[heading].data
-                });
+                this.content = res[heading].data;
             }
+            console.log(this.content, "contnet")
         });
     }
 

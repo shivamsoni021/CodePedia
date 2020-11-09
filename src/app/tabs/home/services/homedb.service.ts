@@ -50,6 +50,14 @@ export class HomeDatabase {
     }
 
     /**
+     * This method is used for getting courses list based on their types like new or trending
+     * @param type course type ex trending or new
+     */
+    getCoursesByCategory(category: string) {
+        return this.http.get(`${BASE_URL}/${ENDPOINTS.ALL_COURSES}.json?orderBy="category"&equalTo="${category}"`);
+    }
+
+    /**
      * This method is used for getting enrolled courses
      * @param courseId selected course id
      */

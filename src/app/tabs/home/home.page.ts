@@ -177,22 +177,20 @@ export class HomePage implements OnInit {
 
     postCourseContentsToDb() {
         const reqBody = {
-            chapterId: 'cChapterOne',
-            point1: {
-                name: 'Compilation',
+            chapterId: 'cChapterTwoe',
+            data: [{
+                name: 'Test',
                 data: '10101010',
                 imageUrl: ''
-            },
-            point2: {
-                name: 'Source Code',
+            }, {
+                name: 'Acha Code',
                 data: '10101010',
                 imageUrl: ''
-            },
-            point3: {
-                name: 'What is C?',
+            }, {
+                name: 'Hai is C?',
                 data: '10101010',
                 imageUrl: ''
-            }
+            }]
 
         };
         this.homeService.postCoursesContentsToFirebase(reqBody, 123).subscribe(res => {

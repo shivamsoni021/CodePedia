@@ -1,7 +1,9 @@
 <ion-content>
 
     <div><img src="assets\icon\codeshala_home.png" /></div>
-
+    <ion-button (click)="postCourseToDb()">
+        Post
+    </ion-button>
     <!-- <ion-button (click)="postCourseToDb()">
         Post
     </ion-button>
@@ -25,6 +27,9 @@
     </ion-button>
     <ion-button (click)="getCourseDetails()">
         Get Det
+    </ion-button> -->
+    <!-- <ion-button (click)="postCourseContentsToDb()">
+        Post
     </ion-button> -->
 
     <div *ngIf="!isStudying" class="studying">

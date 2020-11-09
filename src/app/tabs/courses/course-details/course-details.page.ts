@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatabaseService } from 'src/app/database/database.service';
-import { HomeTechnology } from 'src/app/interfaces/home-technology.interface';
 import { LoadingService } from 'src/app/services/loading.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { AuthService } from 'src/auth/auth.service';
@@ -16,20 +15,20 @@ interface CourseData {
 })
 export class CourseDetailsPage implements OnInit {
 
+    /** This variable is used for storing course details */
     courseDetails: any;
+    /** This variable is used for storing course type */
     courseType: string;
-    requirements: string[] = new Array();
-    benefits: string[] = new Array();
-    wlearn: string[] = new Array();
-    description: string[] = new Array();
-    imageUrl: string;
+    /** This variable is used for storing userId of current user */
     userId: string;
-    id: string;
-    courseName: string;
-    courseStudying: CourseData[] = new Array();
-
-
+    /** This variable is used for storing course studying ids */
+    courseStudying = [];
+    /** This variable is used for storing selected course id */
     selectedCourseId: number;
+    /** This variable is used for checking whether course is enrolled or not */
+    isCourseEnrolled = false;
+
+    /** @ignore */
     constructor(
         private authService: AuthService,
         private databaseService: DatabaseService,
@@ -40,57 +39,40 @@ export class CourseDetailsPage implements OnInit {
     ) { }
 
     ngOnInit() {
-
-
-        // this.courseDetails = window.history.state.courseDetails;
         this.courseType = window.history.state.courseType;
-        console.log(this.courseType);
+    }
+
+    async ionViewWillEnter() {
         this.userId = this.authService.getUserId();
-        // this.id = this.courseDetails.id;
-        // this.databaseService.isStudying(this.userId).subscribe((resData: any) => {
-        //     // tslint:disable-next-line: forin
-        //     for (const course in resData) {
-        //         this.courseStudying.push(resData[course]);
-        //     }
-        //     console.log(this.courseStudying);
-        //     this.courseStudying.forEach((value: any) => {
-        //         this.isStudying(value);
-        //     });
-        //     this.loadingService.hideLoader();
-        // });
-
-
-        //  this.setAllValues();
-    }
-
-    ionViewWillEnter() {
         this.selectedCourseId = window.history.state.courseId;
+        this.authService.getUserData(this.userId).subscribe((res: any) => {
+            console.log(res);
+            // tslint:disable-next-line: forin
+            for (const course in res.courseStudying) {
+                this.courseStudying.push(res.courseStudying[course].courseId);
+            }
+            this.isCourseEnrolled = this.courseStudying.includes(this.selectedCourseId);
+        });
         this.getCourseDetails();
+
     }
 
+    /**
+     * This method is used for getting course details
+     */
     getCourseDetails() {
-        console.log(this.selectedCourseId)
         this.homeService.getCourseDetails(this.selectedCourseId).subscribe(res => {
-            console.log(res);
-            const d: any = [];
             // tslint:disable-next-line: forin
             for (const course in res) {
                 this.courseDetails = res[course];
             }
-            console.log(this.courseDetails);
+            console.log(this.isCourseEnrolled);
+            if (this.isCourseEnrolled) {
+                this.navigateToCoursePartsPage(this.courseDetails.courseIndex, this.courseDetails.courseName, this.courseDetails.imageUrl);
+            }
         });
     }
 
-    setAllValues() {
-        // this.imageUrl = this.courseDetails.imageSrc;
-        // this.courseName = this.courseDetails.name;
-        // this.description = this.courseDetails.description.split('TOSPLIT');
-        // this.requirements = this.courseDetails.requirement.split('TOSPLIT');
-        // this.benefits = this.courseDetails.benefits.split('TOSPLIT');
-        // this.wlearn = this.courseDetails.wlearn.split('TOSPLIT');
-        // this.id = this.courseDetails.id;
-
-    }
 
     /**
      * This method is used for enrolling selected course
@@ -99,32 +81,37 @@ export class CourseDetailsPage implements OnInit {
         this.databaseService.enrollCourse(this.userId, this.selectedCourseId).subscribe((resData: any) => {
             this.toastService.showToast('Course enrolled successfully', 'success');
         });
-        this.navigateToCoursePage(this.courseDetails.courseIndex, this.courseDetails.courseName, this.imageUrl);
+        this.navigateToCoursePartsPage(this.courseDetails.courseIndex, this.courseDetails.courseName, this.courseDetails.imageUrl);
     }
 
-    // isStudying(value: any): boolean {
-
-    //     if (value.courseId === this.id) {
-    //         console.log(value.courseId);
-    //         this.navigateToCoursePage(this.courseDetails.parts, this.courseName, this.imageUrl);
-    //     }
-    //     else {
-    //         return false;
-    //     }
-
-    // }
-
-    navigateToCoursePage(courseDetails: any, courseName: string, image: string): void {
+    /**
+     * This method is used for navigating to course parts page
+     * @param courseDetails selected course details
+     * @param courseName selected course name
+     * @param image selected course title image
+     */
+    navigateToCoursePartsPage(courseDetails: any, courseName: string, image: string): void {
         this.loadingService.hideLoader();
         const id = this.selectedCourseId;
-        this.router.navigate(['tabs/home/course-details/course-parts'], {
-            state: {
-                courseDetails,
-                id,
-                courseName,
-                image
-            }
-        });
+        if (this.router.url.includes('tabs/home')) {
+            this.router.navigate(['tabs/home/course-details/course-parts'], {
+                state: {
+                    courseDetails,
+                    id,
+                    courseName,
+                    image
+                }
+            });
+        } else if (this.router.url.includes('tabs/courses')) {
+            this.router.navigate(['tabs/courses/course-details/course-parts'], {
+                state: {
+                    courseDetails,
+                    id,
+                    courseName,
+                    image
+                }
+            });
+        }
     }
 
 }
