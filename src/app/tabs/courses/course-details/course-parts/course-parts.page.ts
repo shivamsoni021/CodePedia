@@ -88,6 +88,7 @@ export class CoursePartsPage implements OnInit {
         this.navigateToSectionPage(this.currentPart,`part${this.partNumber + 1}`);
       }
       else{
+        
         this.isCourseCompleted = true;
         if(!this.wasCourseCompleted){
         this.databaseService.completeCourses(this.userId , this.courseId,this.courseName,
