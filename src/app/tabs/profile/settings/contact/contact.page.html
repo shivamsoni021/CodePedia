@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ preference }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="preference === 'about'">
+    <p>About Us</p>
+  </div>
+  <div *ngIf="preference === 'contact'">
+    <p>Contact Us</p>
+  </div>
+</ion-content>

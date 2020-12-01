@@ -10,7 +10,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsPage implements OnInit {
 
-  constructor(private authService: AuthService, private alertController: AlertController, private router: Router) {}
+  constructor(private authService: AuthService, private alertController: AlertController
+    , private router: Router) {}
 
   async presentAlert() {
     const alert = await this.alertController.create({
@@ -39,6 +40,14 @@ export class SettingsPage implements OnInit {
   onLogOut(){
     this.authService.logOut();
     this.presentAlert();
+  }
+
+  navigationToContact(preference :string){
+    this.router.navigate(['tabs/profile/settings/contact'], {
+      state: {
+          preference
+      }
+  });
   }
 
 }

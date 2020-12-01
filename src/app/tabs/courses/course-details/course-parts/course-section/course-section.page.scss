@@ -23,7 +23,7 @@
         overflow: hidden;
         padding: 5px;
         border-radius: 1.25rem;
-        background-color:#0007ff;
+        background-image: linear-gradient(to right, red , yellow);
     }
 
 ion-slides{
@@ -45,7 +45,6 @@ ion-img{
     justify-content: center;
     align-items: center;
     height:"100%";
-    
     ion-button{
         margin-top: 78vh;
     }

@@ -9,7 +9,7 @@
 
 <ion-content>
     <div>
-        <ion-item-group>
+        <!-- <ion-item-group>
             <ion-item-divider lines="none">
                 <ion-label class="all-post">
                     <h5>
@@ -19,16 +19,15 @@
             </ion-item-divider>
 
             <ion-item class="setting-items" lines="none" button>
-                <ion-label>Edit Profile</ion-label>
+                <ion-label  (click)="updateProfile()">Update Profile Photo</ion-label>
                 <ion-icon name="pencil" slot="start" size="small" color="primary"></ion-icon>
             </ion-item>
 
-            <ion-item class="setting-items" lines="none" button>
+             <ion-item class="setting-items" lines="none" button>
                 <ion-label>Change Password</ion-label>
                 <ion-icon name="key" slot="start" size="small" color="primary"></ion-icon>
-            </ion-item>
-        </ion-item-group>
-
+            </ion-item> -->
+        <!-- </ion-item-group> -->
 
         <ion-item-group>
             <ion-item-divider>
@@ -45,12 +44,12 @@
             </ion-item>
 
             <ion-item class="setting-items" lines="none" button>
-                <ion-label>About Us</ion-label>
+                <ion-label (click)="navigationToContact('about')">About Us</ion-label>
                 <ion-icon name="information-circle" slot="start" size="small" color="primary"></ion-icon>
             </ion-item>
 
             <ion-item class="setting-items" lines="none" button>
-                <ion-label>Contact Us</ion-label>
+                <ion-label (click)="navigationToContact('contact')">Contact Us</ion-label>
                 <ion-icon name="call" slot="start" size="small" color="primary"></ion-icon>
             </ion-item>
 

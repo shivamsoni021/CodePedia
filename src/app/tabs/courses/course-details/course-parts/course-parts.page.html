@@ -1,6 +1,6 @@
-<ion-header>
-  <ion-toolbar mode="ios">
-    <ion-title>{{ courseName }}</ion-title>
+<ion-header *ngIf="showContent">
+  <ion-toolbar>
+    <ion-title class="ion-text-center code-shala-header-title">{{ courseName }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -19,5 +19,10 @@
         </ion-item>
     </ion-list>
 </ion-card>
+</div>
+<div class="completed-section" *ngIf="!showContent">
+  <ion-button class="continue-button">
+    Continue
+  </ion-button>
 </div>
 </ion-content>

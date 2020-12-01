@@ -1,9 +1,9 @@
-ion-toolbar{
-    --background: #007fffff;
-    ion-title{
-        color:#ffffff;
-    }
-}
+// ion-toolbar{
+//     --background: #007fffff;
+//     ion-title{
+//         color:#ffffff;
+//     }
+// }
 
 .card{
     border-radius: 10px;
@@ -91,4 +91,26 @@ ion-item{
     ion-label{
         margin:0.5rem;
     }
+}
+
+.completed-section{
+    height:100%;
+    background: url('../../../../../assets/images/complete.png');
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover;
+    
+}
+
+.continue-button{
+    --background : linear-gradient(to right, red , orange);
+    margin-top: 75vh;
+    --padding-top: 1.6rem;
+    --padding-start: 2.6rem;
+    --padding-right: 1.6rem;
+    --padding-left: 2.6rem;
 }
