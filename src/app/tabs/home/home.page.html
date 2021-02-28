@@ -2,7 +2,7 @@
 
     <div><img src="assets\icon\codeshala_home.png" /></div>
 
-    <div *ngIf="!isStudying" class="studying">
+    <div *ngIf="isStudying" class="studying">
         <ion-item lines="none" class="technology-title">
             <ion-icon (click)="navigation('studying')" slot="end" name="arrow-forward-outline"></ion-icon>
             <ion-label class="all-post">

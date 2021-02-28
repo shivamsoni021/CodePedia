@@ -1,14 +1,39 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{ preference }}</ion-title>
+    <ion-title class="ion-text-center code-shala-header-title">{{ preference }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div *ngIf="preference === 'about'">
-    <p>About Us</p>
+    <h3>
+      About us
+    </h3>
+    <p>
+      CodePedia is a learning platform where you can learn about different 
+      programming language as well as technology and increase your skills.
+    </p>
   </div>
   <div *ngIf="preference === 'contact'">
-    <p>Contact Us</p>
+    <h3>
+      Contact us
+    </h3>
+    <p>
+      <ion-item class="setting-items" lines="none" button>
+        <ion-label>zenitcoindia@gmail.com</ion-label>
+        <ion-icon name="help-circle" slot="start" size="small" color="primary"></ion-icon>
+    </ion-item>
+    </p>
+  </div>
+  <div *ngIf="preference === 'haf'">
+    <h3>
+      Help &amp; Faq
+    </h3>
+    <p>For any help and assistance mail us to <b>zenitcoindia@gmail.com</b></p>
+  </div>
+  <div *ngIf="preference === 'tpp'">
+    <p>
+      Terms &amp; privacy policy
+    </p>
   </div>
 </ion-content>

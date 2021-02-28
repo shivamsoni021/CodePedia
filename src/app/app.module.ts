@@ -11,11 +11,13 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
-
+import { SplashPage } from '../app/splash/splash.page';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, SplashPage],
+  entryComponents: [
+    SplashPage
+  ],
   imports: [
       BrowserModule,
       IonicModule.forRoot(),

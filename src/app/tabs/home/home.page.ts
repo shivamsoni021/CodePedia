@@ -20,7 +20,7 @@ export class HomePage implements OnInit {
     userId: string;
     technologyTitle = 'Shivam';
     technologies: SliderConfiguration;
-    isStudying=false;
+    isStudying=true;
     enrolledCourses: SliderConfiguration;
     suggestedCourses: SliderConfiguration;
     coursePreference:string = "";
@@ -37,8 +37,8 @@ export class HomePage implements OnInit {
         this.userId = this.authService.getUserId();
         this.loadEnrolledCourse();
         this.databaseService.getCompletedCourses(this.userId);
-        this.loadSuggestedCourse();        
-    }
+        this.loadSuggestedCourse();   
+         }
 
     loadEnrolledCourse(){
         let temData = [];
@@ -49,9 +49,14 @@ export class HomePage implements OnInit {
                     if(temData.length) {
                         this.enrolledCourses = this.homeFormatterService.getFormattedTechnologyData(temData);
                     }
+                
                 });
             }
         });
+ 
+        if(this.enrolledCourses == undefined){
+            this.isStudying = false;
+        }
     }
 
     loadSuggestedCourse(){

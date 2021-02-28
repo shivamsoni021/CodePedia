@@ -22,7 +22,11 @@ const routes: Routes = [
     {
         path: 'blog-tag-list',
         loadChildren: () => import('./feature/blog-tag-list/blog-tag-list.module').then(m => m.BlogTagListPageModule)
-    },
+    },  {
+    path: 'splash',
+    loadChildren: () => import('./splash/splash.module').then( m => m.SplashPageModule)
+  },
+
 
 ];
 
